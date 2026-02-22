@@ -62,14 +62,17 @@ class Database:
             }
             result = self.scans_collection.insert_one(scan_doc)
             
-            # Update user stats
+            # Update user stats (create user if doesn't exist)
             self.users_collection.update_one(
-                {"_id": ObjectId(user_id)},
+                {"user_id": user_id},
                 {
-                    "$inc": {"total_scans": 1},
+                    "$inc": {"total_scans": 1, "threats_blocked": 1 if status == "dangerous" else 0},
                     "$set": {"last_scan": datetime.utcnow()}
-                }
+                },
+                upsert=True
             )
+            
+            logger.info(f"Inserted scan for user {user_id}: {url} - {status}")
             
             return {
                 "id": str(result.inserted_id),
@@ -153,11 +156,17 @@ class Database:
     def get_user_profile(self, user_id: str) -> Dict[str, Any]:
         """Get user profile"""
         try:
-            user = self.users_collection.find_one({"_id": ObjectId(user_id)})
+            user = self.users_collection.find_one({"user_id": user_id})
             if user:
-                user["id"] = str(user.pop("_id"))
+                user["id"] = user.get("user_id", str(user.get("_id", "")))
                 return user
-            return {}
+            # Return empty profile with defaults if user not found
+            return {
+                "id": user_id,
+                "email": "",
+                "total_scans": 0,
+                "threats_blocked": 0
+            }
         except Exception as e:
             logger.error(f"Error fetching profile: {e}")
             return {}
@@ -166,8 +175,9 @@ class Database:
         """Update user profile"""
         try:
             result = self.users_collection.update_one(
-                {"_id": ObjectId(user_id)},
-                {"$set": updates}
+                {"user_id": user_id},
+                {"$set": updates},
+                upsert=True
             )
             return result.modified_count > 0 or result.matched_count > 0
         except Exception as e:
