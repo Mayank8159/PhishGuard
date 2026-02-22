@@ -71,8 +71,8 @@ export const signUp = async (
   name: string
 ): Promise<AuthUser> => {
   try {
-    // Generate a unique user ID
-    const userId = generateUserId();
+    // Generate a consistent user ID based on email
+    const userId = `user_${email.replace(/[^a-z0-9]/gi, '_')}`;
 
     // Create user profile via API
     const user: AuthUser = {
@@ -101,9 +101,16 @@ export const signIn = async (
   password: string
 ): Promise<AuthUser> => {
   try {
-    // For demo purposes, create/retrieve local user
+    // Check if user already exists in storage
+    const existingUser = await getCurrentUser();
+    if (existingUser && existingUser.email === email) {
+      console.log('User already signed in:', existingUser);
+      return existingUser;
+    }
+
+    // For demo purposes, create consistent user ID based on email
     // In production, validate against authentication service
-    const userId = generateUserId();
+    const userId = `user_${email.replace(/[^a-z0-9]/gi, '_')}`;
 
     const user: AuthUser = {
       id: userId,

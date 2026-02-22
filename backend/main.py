@@ -289,7 +289,7 @@ async def get_user_scans(
                 id=scan["id"],
                 url=scan["url"],
                 status=scan["status"],
-                created_at=scan.get("created", ""),
+                created_at=scan.get("timestamp", ""),
                 risk_score=scan.get("risk_score")
             )
             for scan in data
