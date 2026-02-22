@@ -19,16 +19,11 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# CORS configuration (comma-separated list or '*')
-cors_env = os.getenv("CORS_ORIGINS", "*")
-origins = [origin.strip() for origin in cors_env.split(",") if origin.strip()]
-if not origins:
-    origins = ["*"]
-
+# CORS configuration - Allow all origins for mobile app compatibility
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,  # Must be False when allow_origins is ["*"]
     allow_methods=["*"],
     allow_headers=["*"],
 )
