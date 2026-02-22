@@ -11,13 +11,15 @@ import {
   Alert,
   ActivityIndicator,
   RefreshControl,
-  Platform
+  Platform,
+  Switch
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Shield, Link, Search, Activity, ShieldCheck, CheckCircle, Zap, AlertTriangle, XCircle } from 'lucide-react-native';
 import { analyzeUrl, getRecentScans, getThreatStats } from '../../services/threatAnalysisService';
 import { useApp } from '../../contexts/AppContext';
 import { useRouter } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Separate component for Scan Items
 interface ScanItemProps {
@@ -56,10 +58,67 @@ export default function PhishGuardDashboard() {
   const [stats, setStats] = useState({ threatsBlocked: 0, safeSites: 0, scansTotal: 0 });
   const [isLoading, setIsLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [protectionEnabled, setProtectionEnabled] = useState(true);
 
   useEffect(() => {
     loadData();
   }, [user]);
+
+  useEffect(() => {
+    loadProtectionStatus();
+  }, [user]);
+
+  const getProtectionStorageKey = (userId?: string | null) => {
+    return `phishguard_protection_enabled_${userId ?? 'guest'}`;
+  };
+
+  const loadProtectionStatus = async () => {
+    try {
+      const storedValue = await AsyncStorage.getItem(
+        getProtectionStorageKey(user?.id)
+      );
+      if (storedValue !== null) {
+        setProtectionEnabled(storedValue === 'true');
+      }
+    } catch (error) {
+      console.warn('Error loading protection status:', error);
+    }
+  };
+
+  const persistProtectionStatus = async (enabled: boolean) => {
+    try {
+      await AsyncStorage.setItem(
+        getProtectionStorageKey(user?.id),
+        enabled ? 'true' : 'false'
+      );
+    } catch (error) {
+      console.warn('Error saving protection status:', error);
+    }
+  };
+
+  const applyProtectionToggle = async (enabled: boolean) => {
+    setProtectionEnabled(enabled);
+    await persistProtectionStatus(enabled);
+  };
+
+  const handleProtectionToggle = () => {
+    if (protectionEnabled) {
+      Alert.alert(
+        'Disable Protection',
+        'Active protection will be turned off until you re-enable it. Continue?',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          {
+            text: 'Disable',
+            style: 'destructive',
+            onPress: () => applyProtectionToggle(false),
+          },
+        ]
+      );
+    } else {
+      applyProtectionToggle(true);
+    }
+  };
 
   const loadData = async () => {
     try {
@@ -160,6 +219,10 @@ export default function PhishGuardDashboard() {
   };
 
   const handleQuickScan = () => {
+    if (!protectionEnabled) {
+      Alert.alert('Protection Disabled', 'Enable Active Protection to run a quick scan.');
+      return;
+    }
     Alert.alert('Quick Scan', 'Starting comprehensive device scan...\n\nThis may take a few minutes.');
     setTimeout(() => {
       Alert.alert('Scan Complete', `Scanned ${stats.scansTotal} URLs\n✓ All systems secure`);
@@ -302,18 +365,31 @@ export default function PhishGuardDashboard() {
         <View style={styles.protectionCard}>
           <View style={styles.protectionHeader}>
             <View style={styles.protectionTitleContainer}>
-              <ShieldCheck size={20} color="#10B981" />
+              <ShieldCheck size={20} color={protectionEnabled ? '#10B981' : '#EF4444'} />
               <Text style={styles.protectionTitle}>Active Protection</Text>
             </View>
-            <View style={styles.statusBadge}>
-              <Text style={styles.statusBadgeText}>ONLINE</Text>
+            <View style={styles.protectionActions}>
+              <View style={[styles.statusBadge, !protectionEnabled && styles.statusBadgeOffline]}>
+                <Text style={[styles.statusBadgeText, !protectionEnabled && styles.statusBadgeTextOffline]}>
+                  {protectionEnabled ? 'ONLINE' : 'OFFLINE'}
+                </Text>
+              </View>
+              <Switch
+                value={protectionEnabled}
+                onValueChange={handleProtectionToggle}
+                trackColor={{ false: '#334155', true: '#10B981' }}
+                thumbColor={protectionEnabled ? '#0A0F1C' : '#94A3B8'}
+                ios_backgroundColor="#334155"
+              />
             </View>
           </View>
           <Text style={styles.protectionDesc}>
-            Real-time phishing detection is active. All URLs are being monitored for suspicious activity.
+            {protectionEnabled
+              ? 'Real-time phishing detection is active. All URLs are being monitored for suspicious activity.'
+              : 'Protection is paused. Turn it on to resume real-time phishing detection.'}
           </Text>
           <TouchableOpacity 
-            style={styles.scanBtn} 
+            style={[styles.scanBtn, !protectionEnabled && styles.scanBtnDisabled]} 
             activeOpacity={0.8}
             onPress={handleQuickScan}
           >
@@ -366,9 +442,13 @@ const styles = StyleSheet.create({
   protectionHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 },
   protectionTitleContainer: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   protectionTitle: { color: '#10B981', fontSize: 17, fontWeight: 'bold' },
+  protectionActions: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   statusBadge: { backgroundColor: '#10B981', paddingHorizontal: 10, paddingVertical: 4, borderRadius: 100 },
   statusBadgeText: { color: '#0A0F1C', fontSize: 9, fontWeight: 'bold' },
+  statusBadgeOffline: { backgroundColor: '#EF4444' },
+  statusBadgeTextOffline: { color: '#0A0F1C' },
   protectionDesc: { color: '#9CA3AF', fontSize: 12, lineHeight: 18, marginBottom: 20 },
   scanBtn: { backgroundColor: '#0DA86D', borderRadius: 8, padding: 12, alignItems: 'center', flexDirection: 'row', justifyContent: 'center', gap: 8, shadowColor: 'rgba(16, 185, 129, 0.4)', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.7, shadowRadius: 10, elevation: 7, borderWidth: 2, borderTopColor: 'rgba(255, 255, 255, 0.4)', borderColor: 'rgba(16, 185, 129, 0.3)' },
+  scanBtnDisabled: { backgroundColor: '#334155', borderColor: 'rgba(148, 163, 184, 0.3)', shadowOpacity: 0.2 },
   scanBtnText: { color: 'white', fontSize: 16, fontWeight: 'bold' }
 });

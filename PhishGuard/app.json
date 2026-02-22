@@ -7,7 +7,7 @@
     "icon": "./assets/images/icon.png",
     "scheme": "phishguard",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": false,
+    "newArchEnabled": true,
     "splash": {
       "image": "./assets/images/splash-icon.png",
       "resizeMode": "contain",
@@ -25,7 +25,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#0A0F1C"
       },
-      "package": "com.phishguard.app"
+      "package": "com.phishguard.app",
+      "versionCode": 1
     },
     "web": {
       "bundler": "metro",
@@ -40,6 +41,12 @@
     },
     "updates": {
       "enabled": false
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "2d6e63fe-b166-4052-be1f-e463e2574b25"
+      }
     }
   }
 }
