@@ -1,2399 +1,1360 @@
 {
-  "version": "2.8",
-  "children": [
-    {
-      "type": "frame",
-      "id": "xNZ7U",
-      "x": 0,
-      "y": 0,
-      "name": "root",
-      "clip": true,
-      "width": 402,
-      "height": 874,
-      "fill": "#0A0F1C",
-      "layout": "vertical",
-      "children": [
-        {
-          "type": "frame",
-          "id": "00BRA",
-          "name": "content",
-          "width": "fill_container",
-          "layout": "vertical",
-          "gap": 10,
-          "padding": [
-            6,
-            20
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "id": "8DdMi",
-              "name": "elementalBackground",
-              "width": "fill_container",
-              "height": 27,
-              "fill": "rgba(16, 185, 129, 0.05)",
-              "cornerRadius": 20,
-              "gap": 10,
-              "padding": 10,
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "qnGqt",
-                  "name": "waterDrop1",
-                  "width": 60,
-                  "height": 60,
-                  "fill": "rgba(59, 130, 246, 0.15)",
-                  "cornerRadius": 30
-                },
-                {
-                  "type": "frame",
-                  "id": "4fTaX",
-                  "name": "waterDrop2",
-                  "width": 40,
-                  "height": 40,
-                  "fill": "rgba(16, 185, 129, 0.15)",
-                  "cornerRadius": 20
-                },
-                {
-                  "type": "frame",
-                  "id": "WhjTB",
-                  "name": "waterDrop3",
-                  "width": 30,
-                  "height": 30,
-                  "fill": "rgba(59, 130, 246, 0.1)",
-                  "cornerRadius": 15
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "YXefN",
-              "name": "header",
-              "width": "fill_container",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "3nsgv",
-                  "name": "headerLeft",
-                  "gap": 12,
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "lnYGu",
-                      "name": "newTitle",
-                      "fill": "#FFFFFF",
-                      "content": "🛡️ PhishGuard",
-                      "fontFamily": "Inter",
-                      "fontSize": 24,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "XUcUS",
-              "name": "heroSection",
-              "width": "fill_container",
-              "layout": "vertical",
-              "gap": 8,
-              "children": [
-                {
-                  "type": "text",
-                  "id": "6DYPY",
-                  "name": "heroLabel",
-                  "fill": "#64748B",
-                  "content": "THREAT ANALYSIS",
-                  "fontFamily": "Inter",
-                  "fontSize": 11,
-                  "fontWeight": "normal",
-                  "letterSpacing": 2
-                },
-                {
-                  "type": "frame",
-                  "id": "4XJd0",
-                  "name": "heroCard",
-                  "width": "fill_container",
-                  "fill": "#1E293B",
-                  "cornerRadius": 12,
-                  "layout": "vertical",
-                  "gap": 12,
-                  "padding": 16,
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "eMubn",
-                      "name": "urlLabel",
-                      "fill": "#94A3B8",
-                      "content": "🌊 Enter URL to Analyze",
-                      "fontFamily": "Inter",
-                      "fontSize": 14,
-                      "fontWeight": "normal"
-                    },
-                    {
-                      "type": "frame",
-                      "id": "Be9gg",
-                      "name": "urlInput",
-                      "width": "fill_container",
-                      "height": 56,
-                      "fill": "#0F172A",
-                      "cornerRadius": 8,
-                      "gap": 12,
-                      "padding": [
-                        0,
-                        16
-                      ],
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "XBKtt",
-                          "name": "urlPlaceholder",
-                          "fill": "#475569",
-                          "content": "https://example.com",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 15,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "zYcJV",
-                      "name": "analyzeBtn",
-                      "width": "fill_container",
-                      "height": 56,
-                      "fill": "#10B981",
-                      "cornerRadius": 12,
-                      "gap": 10,
-                      "padding": [
-                        16,
-                        0
-                      ],
-                      "justifyContent": "center",
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "ZHvC5",
-                          "name": "analyzeBtnText",
-                          "fill": "#FFFFFF",
-                          "textGrowth": "fixed-width",
-                          "width": 330,
-                          "content": "🔍 Analyze URL 💧",
-                          "textAlign": "center",
-                          "fontFamily": "Inter",
-                          "fontSize": 18,
-                          "fontWeight": "800"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "fwzTe",
-              "name": "statsSection",
-              "width": "fill_container",
-              "layout": "vertical",
-              "gap": 8,
-              "children": [
-                {
-                  "type": "text",
-                  "id": "gsWax",
-                  "name": "statsLabel",
-                  "fill": "#64748B",
-                  "content": "🌊 SECURITY STATS",
-                  "fontFamily": "Inter",
-                  "fontSize": 11,
-                  "fontWeight": "normal",
-                  "letterSpacing": 2
-                },
-                {
-                  "type": "frame",
-                  "id": "B7ari",
-                  "name": "statsGrid",
-                  "width": "fill_container",
-                  "gap": 12,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "D5idN",
-                      "name": "threatsCard",
-                      "width": "fill_container",
-                      "fill": "#1E293B",
-                      "cornerRadius": 12,
-                      "layout": "vertical",
-                      "gap": 6,
-                      "padding": [
-                        14,
-                        12
-                      ],
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "V4C9A",
-                          "name": "threatsLabel",
-                          "fill": "#64748B",
-                          "content": "🛡️ THREATS BLOCKED",
-                          "fontFamily": "Inter",
-                          "fontSize": 10,
-                          "fontWeight": "normal",
-                          "letterSpacing": 1.5
-                        },
-                        {
-                          "type": "text",
-                          "id": "LMsB4",
-                          "name": "threatsValue",
-                          "fill": "#FFFFFF",
-                          "content": "2,847",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 24,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "E1p7x",
-                          "name": "threatsChange",
-                          "fill": "#10B981",
-                          "content": "+240 today",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 12,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "ryAPM",
-                      "name": "safeCard",
-                      "width": "fill_container",
-                      "fill": "#1E293B",
-                      "cornerRadius": 12,
-                      "layout": "vertical",
-                      "gap": 6,
-                      "padding": [
-                        14,
-                        12
-                      ],
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "nKvvF",
-                          "name": "safeLabel",
-                          "fill": "#64748B",
-                          "content": "✅ SAFE SITES",
-                          "fontFamily": "Inter",
-                          "fontSize": 10,
-                          "fontWeight": "normal",
-                          "letterSpacing": 1.5
-                        },
-                        {
-                          "type": "text",
-                          "id": "JrS9c",
-                          "name": "safeValue",
-                          "fill": "#FFFFFF",
-                          "content": "86%",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 24,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "HdsdA",
-                          "name": "safeChange",
-                          "fill": "#10B981",
-                          "content": "+5% this week",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 12,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "4l5Dn",
-              "name": "recentSection",
-              "width": "fill_container",
-              "layout": "vertical",
-              "gap": 8,
-              "children": [
-                {
-                  "type": "text",
-                  "id": "kE86z",
-                  "name": "recentLabel",
-                  "fill": "#64748B",
-                  "content": "⚡ RECENT SCANS",
-                  "fontFamily": "Inter",
-                  "fontSize": 11,
-                  "fontWeight": "normal",
-                  "letterSpacing": 2
-                },
-                {
-                  "type": "frame",
-                  "id": "XuPau",
-                  "name": "recentCard",
-                  "clip": true,
-                  "width": "fill_container",
-                  "fill": "#1E293B",
-                  "cornerRadius": 12,
-                  "layout": "vertical",
-                  "gap": 2,
-                  "padding": 4,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "kCa6P",
-                      "name": "scan1",
-                      "width": "fill_container",
-                      "fill": "#0F172A",
-                      "cornerRadius": 8,
-                      "gap": 8,
-                      "padding": [
-                        10,
-                        12
-                      ],
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "NkSey",
-                          "name": "scan1Status",
-                          "fill": "#10B981",
-                          "content": "💧",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 14,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "frame",
-                          "id": "30Qi9",
-                          "name": "scan1Content",
-                          "width": "fill_container",
-                          "layout": "vertical",
-                          "gap": 2,
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "5QG8n",
-                              "name": "scan1Title",
-                              "fill": "#FFFFFF",
-                              "content": "google.com",
-                              "fontFamily": "Inter",
-                              "fontSize": 14,
-                              "fontWeight": "normal"
-                            },
-                            {
-                              "type": "text",
-                              "id": "DsXcl",
-                              "name": "scan1Meta",
-                              "fill": "#64748B",
-                              "content": "Safe · 2 min ago",
-                              "fontFamily": "JetBrains Mono",
-                              "fontSize": 11,
-                              "fontWeight": "normal"
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "zdNuv",
-                      "name": "scan2",
-                      "width": "fill_container",
-                      "fill": "#0F172A",
-                      "cornerRadius": 8,
-                      "gap": 8,
-                      "padding": [
-                        10,
-                        12
-                      ],
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "tolxJ",
-                          "name": "scan2Status",
-                          "fill": "#F59E0B",
-                          "content": "⚠",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 14,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "frame",
-                          "id": "3nMGq",
-                          "name": "scan2Content",
-                          "width": "fill_container",
-                          "layout": "vertical",
-                          "gap": 2,
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "XHpDI",
-                              "name": "scan2Title",
-                              "fill": "#FFFFFF",
-                              "content": "suspicious-site.xyz",
-                              "fontFamily": "Inter",
-                              "fontSize": 14,
-                              "fontWeight": "normal"
-                            },
-                            {
-                              "type": "text",
-                              "id": "UZIJt",
-                              "name": "scan2Meta",
-                              "fill": "#F59E0B",
-                              "content": "Warning · 5 min ago",
-                              "fontFamily": "JetBrains Mono",
-                              "fontSize": 11,
-                              "fontWeight": "normal"
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "GqSYu",
-                      "name": "scan3",
-                      "width": "fill_container",
-                      "fill": "#0F172A",
-                      "cornerRadius": 8,
-                      "gap": 8,
-                      "padding": [
-                        10,
-                        12
-                      ],
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "hlkkD",
-                          "name": "scan3Status",
-                          "fill": "#EF4444",
-                          "content": "✗",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 14,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "frame",
-                          "id": "ljmDh",
-                          "name": "scan3Content",
-                          "width": "fill_container",
-                          "layout": "vertical",
-                          "gap": 2,
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "688jQ",
-                              "name": "scan3Title",
-                              "fill": "#FFFFFF",
-                              "content": "phishing-trap.com",
-                              "fontFamily": "Inter",
-                              "fontSize": 14,
-                              "fontWeight": "normal"
-                            },
-                            {
-                              "type": "text",
-                              "id": "sagha",
-                              "name": "scan3Meta",
-                              "fill": "#EF4444",
-                              "content": "Dangerous · 12 min ago",
-                              "fontFamily": "JetBrains Mono",
-                              "fontSize": 11,
-                              "fontWeight": "normal"
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "EoL1F",
-              "name": "protectionSection",
-              "width": "fill_container",
-              "layout": "vertical",
-              "gap": 8,
-              "children": [
-                {
-                  "type": "text",
-                  "id": "Qol0G",
-                  "name": "protectionLabel",
-                  "fill": "#64748B",
-                  "content": "🌿 PROTECTION STATUS",
-                  "fontFamily": "Inter",
-                  "fontSize": 11,
-                  "fontWeight": "normal",
-                  "letterSpacing": 2
-                },
-                {
-                  "type": "frame",
-                  "id": "z6U0a",
-                  "name": "protectionCard",
-                  "width": "fill_container",
-                  "fill": "#1E293B",
-                  "cornerRadius": 12,
-                  "layout": "vertical",
-                  "gap": 16,
-                  "padding": 20,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "bBpbL",
-                      "name": "protectionHeader",
-                      "width": "fill_container",
-                      "gap": 12,
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "O9JhK",
-                          "name": "protectionTitle",
-                          "fill": "#10B981",
-                          "content": "🛡️ Active Protection",
-                          "fontFamily": "Inter",
-                          "fontSize": 17,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "frame",
-                          "id": "GKTIh",
-                          "name": "statusBadge",
-                          "fill": "#10B981",
-                          "cornerRadius": 100,
-                          "padding": [
-                            5,
-                            10
-                          ],
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "Swzf9",
-                              "name": "statusText",
-                              "fill": "#0A0F1C",
-                              "content": "ONLINE",
-                              "fontFamily": "JetBrains Mono",
-                              "fontSize": 9,
-                              "fontWeight": "normal"
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "text",
-                      "id": "beRiM",
-                      "name": "protectionDesc",
-                      "fill": "#9CA3AF",
-                      "textGrowth": "fixed-width-height",
-                      "width": 327,
-                      "height": 32,
-                      "content": "Real-time phishing detection is active. All URLs are being monitored for suspicious activity.",
-                      "lineHeight": 1.5,
-                      "fontFamily": "Inter",
-                      "fontSize": 12,
-                      "fontWeight": "normal"
-                    },
-                    {
-                      "type": "frame",
-                      "id": "r0XVE",
-                      "name": "scanBtn",
-                      "width": "fill_container",
-                      "height": 44,
-                      "fill": "#10B981",
-                      "cornerRadius": 8,
-                      "gap": 8,
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "gJGPD",
-                          "name": "scanBtnText",
-                          "fill": "#FFFFFF",
-                          "textGrowth": "fixed-width-height",
-                          "width": "fill_container",
-                          "height": "fill_container",
-                          "content": "⚡ Quick Scan",
-                          "textAlign": "center",
-                          "textAlignVertical": "middle",
-                          "fontFamily": "Inter",
-                          "fontSize": 18,
-                          "fontWeight": "800"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+  "version": "3.0",
+  "metadata": {
+    "title": "PhishGuard - Complete UI/UX Design System",
+    "description": "Professional authentication and security app with Lucide icons implementation",
+    "lastUpdated": "2026-02-21",
+    "designedBy": "PhishGuard Team",
+    "framework": "React Native + Expo Router",
+    "icons": "Lucide React Native",
+    "colorScheme": "Dark theme with #10B981 green accent",
+    "backend": "FastAPI + PocketBase (Free & Self-hosted)"
+  },
+  "designSystem": {
+    "colors": {
+      "primary": "#10B981",
+      "background": {
+        "dark": "#0A0F1C",
+        "medium": "#0F172A",
+        "card": "#1E293B"
+      },
+      "text": {
+        "primary": "#FFFFFF",
+        "secondary": "#94A3B8",
+        "tertiary": "#64748B"
+      },
+      "status": {
+        "safe": "#10B981",
+        "warning": "#F59E0B",
+        "danger": "#EF4444"
+      }
     },
+    "typography": {
+      "h1": "28px Bold, Letter Spacing 1",
+      "h2": "24px Bold",
+      "h3": "18px SemiBold",
+      "body": "14-16px Regular",
+      "button": "16px Bold, Letter Spacing 0.5"
+    },
+    "spacing": {
+      "small": 8,
+      "medium": 16,
+      "large": 24,
+      "xlarge": 32
+    },
+    "iconSizes": {
+      "small": 16,
+      "medium": 20,
+      "large": 24,
+      "xlarge": 48,
+      "logo": 96
+    }
+  },
+  "appWorkflow": {
+    "description": "Complete user journey through PhishGuard application",
+    "flow": [
+      {
+        "step": 1,
+        "screen": "Splash Screen",
+        "duration": "2.5s",
+        "action": "Show logo animation and check authentication state"
+      },
+      {
+        "step": 2,
+        "screen": "Authentication Check",
+        "condition": "User logged in?",
+        "ifTrue": "Navigate to Home Screen (step 4)",
+        "ifFalse": "Navigate to Login Screen (step 3)"
+      },
+      {
+        "step": 3,
+        "screen": "Login/Register",
+        "actions": ["User can login with credentials", "User can navigate to register", "After successful auth, navigate to Home (step 4)"]
+      },
+      {
+        "step": 4,
+        "screen": "Home Screen",
+        "features": ["URL analysis", "View stats", "Recent scans", "Navigate via tabs"]
+      },
+      {
+        "step": 5,
+        "screen": "History Screen",
+        "features": ["Filter scans", "Delete scans", "View details"]
+      },
+      {
+        "step": 6,
+        "screen": "Settings Screen",
+        "features": ["View profile", "View stats", "Logout"]
+      }
+    ]
+  },
+  "screens": [
     {
-      "type": "frame",
-      "id": "gHPz3",
-      "x": 450,
-      "y": 0,
-      "name": "scanResultScreen",
-      "clip": true,
-      "width": 402,
-      "height": 874,
-      "fill": "#0A0F1C",
-      "layout": "vertical",
-      "children": [
+      "id": "SCREEN_SPLASH",
+      "name": "Splash Screen",
+      "route": "/",
+      "file": "app/index.tsx",
+      "description": "Initial loading screen with logo and animation",
+      "position": {"x": 0, "y": 0},
+      "size": {"width": 375, "height": 812},
+      "background": "Linear Gradient: #0A0F1C → #0F172A → #1E293B",
+      "elements": [
         {
-          "type": "frame",
-          "id": "9b8hD",
-          "name": "scanStatusBar",
-          "padding": [
-            16,
-            24
-          ],
+          "type": "Logo Container",
+          "element": "View (96x96 circle)",
+          "background": "rgba(16, 185, 129, 0.15)",
+          "border": "2px rgba(16, 185, 129, 0.3)",
           "children": [
             {
-              "type": "text",
-              "id": "RisXm",
-              "name": "scanTime",
-              "fill": "#FFFFFF",
-              "content": "9:41",
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "normal"
-            },
-            {
-              "type": "frame",
-              "id": "xJVSa",
-              "name": "scanLevels",
-              "width": "fit_content(0)",
-              "height": "fit_content(0)",
-              "gap": 6
+              "type": "Icon",
+              "component": "<Shield />",
+              "library": "lucide-react-native",
+              "size": 48,
+              "color": "#10B981"
             }
           ]
         },
         {
-          "type": "frame",
-          "id": "AfKMd",
-          "name": "scanContent",
-          "width": "fill_container",
-          "height": 817,
-          "layout": "vertical",
-          "gap": 28,
-          "padding": [
-            16,
-            24,
-            32,
-            24
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "id": "TSQLO",
-              "name": "scanHeader",
-              "width": 29,
-              "height": 30,
-              "gap": 16,
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "cSIQv",
-                  "name": "backBtn",
-                  "width": 21,
-                  "height": 24,
-                  "fill": "#0F172A",
-                  "cornerRadius": 8,
-                  "layout": "vertical",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "uPbLG",
-                      "name": "backBtnText",
-                      "fill": "#FFFFFF",
-                      "content": "←",
-                      "fontFamily": "Inter",
-                      "fontSize": 20,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "vo97k",
-              "name": "resultSection",
-              "width": "fill_container",
-              "layout": "vertical",
-              "gap": 24,
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "IlqSE",
-                  "name": "resultLabel",
-                  "fill": "#64748B",
-                  "content": "SCAN RESULTS",
-                  "fontFamily": "Inter",
-                  "fontSize": 10,
-                  "fontWeight": "normal",
-                  "letterSpacing": 3
-                },
-                {
-                  "type": "frame",
-                  "id": "b2l2i",
-                  "name": "resultCard",
-                  "width": "fill_container",
-                  "fill": "#0F172A",
-                  "cornerRadius": 12,
-                  "layout": "vertical",
-                  "gap": 24,
-                  "padding": [
-                    28,
-                    24
-                  ],
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "6S38i",
-                      "name": "resultStatus",
-                      "layout": "vertical",
-                      "gap": 12,
-                      "justifyContent": "center",
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "mk042",
-                          "name": "resultIcon",
-                          "fill": "#10B981",
-                          "content": "✓",
-                          "fontFamily": "Inter",
-                          "fontSize": 64,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "ozq7B",
-                          "name": "resultTitle",
-                          "fill": "#10B981",
-                          "content": "Safe Website",
-                          "fontFamily": "Inter",
-                          "fontSize": 28,
-                          "fontWeight": "600"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "text",
-                      "id": "Lm3oG",
-                      "name": "resultUrl",
-                      "fill": "#94A3B8",
-                      "content": "https://google.com",
-                      "fontFamily": "JetBrains Mono",
-                      "fontSize": 14,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "knFVb",
-              "name": "detailsSection",
-              "width": "fill_container",
-              "layout": "vertical",
-              "gap": 24,
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "Shp6a",
-                  "name": "detailsLabel",
-                  "fill": "#64748B",
-                  "content": "DETAILS",
-                  "fontFamily": "Inter",
-                  "fontSize": 10,
-                  "fontWeight": "normal",
-                  "letterSpacing": 3
-                },
-                {
-                  "type": "frame",
-                  "id": "jj6zZ",
-                  "name": "detailsCard",
-                  "width": "fill_container",
-                  "fill": "#0F172A",
-                  "cornerRadius": 12,
-                  "layout": "vertical",
-                  "gap": 20,
-                  "padding": 20,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "4cky9",
-                      "name": "detail1",
-                      "width": "fill_container",
-                      "layout": "vertical",
-                      "gap": 6,
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "9NVBm",
-                          "name": "detail1Label",
-                          "fill": "#94A3B8",
-                          "content": "SSL Certificate",
-                          "fontFamily": "Inter",
-                          "fontSize": 14,
-                          "fontWeight": "500"
-                        },
-                        {
-                          "type": "text",
-                          "id": "35drL",
-                          "name": "detail1Value",
-                          "fill": "#10B981",
-                          "content": "Valid",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 14,
-                          "fontWeight": "600"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "jpKg8",
-                      "name": "detail2",
-                      "width": "fill_container",
-                      "layout": "vertical",
-                      "gap": 6,
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "ifTSe",
-                          "name": "detail2Label",
-                          "fill": "#94A3B8",
-                          "content": "Domain Age",
-                          "fontFamily": "Inter",
-                          "fontSize": 14,
-                          "fontWeight": "500"
-                        },
-                        {
-                          "type": "text",
-                          "id": "p9mM1",
-                          "name": "detail2Value",
-                          "fill": "#10B981",
-                          "content": "20+ years",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 14,
-                          "fontWeight": "600"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "OSSKZ",
-                      "name": "detail3",
-                      "width": "fill_container",
-                      "layout": "vertical",
-                      "gap": 6,
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "MfPUo",
-                          "name": "detail3Label",
-                          "fill": "#94A3B8",
-                          "content": "Blacklist Status",
-                          "fontFamily": "Inter",
-                          "fontSize": 14,
-                          "fontWeight": "500"
-                        },
-                        {
-                          "type": "text",
-                          "id": "EYMgS",
-                          "name": "detail3Value",
-                          "fill": "#10B981",
-                          "content": "Clean",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 14,
-                          "fontWeight": "600"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+          "type": "Title",
+          "text": "PhishGuard",
+          "style": "fontSize: 28, fontWeight: 800, color: #FFFFFF, letterSpacing: 1",
+          "marginTop": 24
+        },
+        {
+          "type": "Loading Indicator",
+          "component": "<ActivityIndicator />",
+          "size": "large",
+          "color": "#10B981",
+          "marginTop": 48
         }
-      ]
+      ],
+      "behavior": "Display for 2.5s, then check auth state and navigate"
     },
     {
-      "type": "frame",
-      "id": "Rtb7h",
-      "x": 900,
-      "y": 0,
-      "name": "historyScreen",
-      "clip": true,
-      "width": 402,
-      "height": 874,
-      "fill": "#0A0F1C",
-      "layout": "vertical",
-      "children": [
+      "id": "SCREEN_LOGIN",
+      "name": "Login Screen",
+      "route": "/(auth)/login",
+      "file": "app/(auth)/login.tsx",
+      "description": "User login with email and password, professional Lucide icons",
+      "position": {"x": 425, "y": 0},
+      "size": {"width": 375, "height": 812},
+      "background": "Linear Gradient: #0A0F1C → #0F172A → #1E293B",
+      "layout": {
+        "padding": "24px",
+        "gap": "24px",
+        "scrollable": true
+      },
+      "elements": [
         {
-          "type": "frame",
-          "id": "2Ompr",
-          "name": "historyStatusBar",
-          "width": "fill_container",
-          "gap": 12,
-          "padding": [
-            16,
-            24
-          ],
+          "type": "Logo Section",
+          "marginTop": 48,
+          "align": "center",
           "children": [
             {
-              "type": "text",
-              "id": "Oagl3",
-              "name": "historyTime",
-              "fill": "#FFFFFF",
-              "content": "9:41",
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "normal"
+              "type": "Logo Circle",
+              "size": "96x96",
+              "background": "rgba(16, 185, 129, 0.15)",
+              "border": "2px rgba(16, 185, 129, 0.3)",
+              "borderRadius": 48,
+              "children": [
+                {
+                  "type": "Icon",
+                  "component": "<Shield />",
+                  "library": "lucide-react-native",
+                  "size": 48,
+                  "color": "#10B981"
+                }
+              ]
+            },
+            {
+              "type": "Text",
+              "text": "PhishGuard",
+              "style": "fontSize: 28, fontWeight: 800, color: #FFFFFF, letterSpacing: 1",
+              "marginTop": 16
             }
           ]
         },
         {
-          "type": "frame",
-          "id": "2P0pM",
-          "name": "historyContent",
-          "width": "fill_container",
-          "layout": "vertical",
-          "gap": 32,
-          "padding": [
-            16,
-            24,
-            32,
-            24
-          ],
+          "type": "Header",
+          "marginTop": 32,
           "children": [
             {
-              "type": "frame",
-              "id": "cOuH1",
-              "name": "historyBackBtn",
-              "width": 24,
-              "height": 24,
-              "fill": "#0F172A",
-              "cornerRadius": 8,
-              "layout": "vertical",
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "m6ROg",
-                  "name": "backText",
-                  "fill": "#FFFFFF",
-                  "content": "←",
-                  "fontFamily": "Inter",
-                  "fontSize": 16,
-                  "fontWeight": "normal"
-                }
-              ]
+              "type": "Title",
+              "text": "Welcome Back",
+              "style": "fontSize: 28, fontWeight: 700, color: #FFFFFF"
             },
             {
-              "type": "frame",
-              "id": "JJezl",
-              "name": "historyHeader",
-              "width": "fill_container",
-              "layout": "vertical",
-              "gap": 12,
-              "children": [
-                {
-                  "type": "text",
-                  "id": "Zomxw",
-                  "name": "historyTitle",
-                  "fill": "#FFFFFF",
-                  "content": "Scan History",
-                  "fontFamily": "Inter",
-                  "fontSize": 28,
-                  "fontWeight": "normal"
-                },
-                {
-                  "type": "text",
-                  "id": "Y4R8i",
-                  "name": "historySubtitle",
-                  "fill": "#94A3B8",
-                  "content": "View all your past security scans",
-                  "fontFamily": "Inter",
-                  "fontSize": 14,
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "vOIoI",
-              "name": "filterSection",
-              "width": "fill_container",
-              "gap": 8,
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "Jt0d1",
-                  "name": "filterAll",
-                  "fill": "#10B981",
-                  "cornerRadius": 100,
-                  "padding": [
-                    10,
-                    20
-                  ],
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "DzlQn",
-                      "name": "filterAllText",
-                      "fill": "#0A0F1C",
-                      "content": "All",
-                      "textAlign": "center",
-                      "fontFamily": "Inter",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "OLNVk",
-                  "name": "filterSafe",
-                  "fill": "#1E293B",
-                  "cornerRadius": 100,
-                  "padding": [
-                    10,
-                    20
-                  ],
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "T2cbC",
-                      "name": "filterSafeText",
-                      "fill": "#94A3B8",
-                      "content": "Safe",
-                      "textAlign": "center",
-                      "fontFamily": "Inter",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "kRbLA",
-                  "name": "filterDanger",
-                  "fill": "#1E293B",
-                  "cornerRadius": 100,
-                  "padding": [
-                    10,
-                    20
-                  ],
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "wrQhZ",
-                      "name": "filterDangerText",
-                      "fill": "#94A3B8",
-                      "content": "Threats",
-                      "textAlign": "center",
-                      "fontFamily": "Inter",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "YbEyS",
-              "name": "historyList",
-              "width": "fill_container",
-              "layout": "vertical",
-              "gap": 12,
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "4vq84",
-                  "name": "historyItem1",
-                  "width": "fill_container",
-                  "fill": "#1E293B",
-                  "cornerRadius": 12,
-                  "gap": 12,
-                  "padding": 16,
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "oDsvb",
-                      "name": "histIcon1",
-                      "fill": "#10B981",
-                      "content": "🌊",
-                      "fontFamily": "Inter",
-                      "fontSize": 20,
-                      "fontWeight": "normal"
-                    },
-                    {
-                      "type": "frame",
-                      "id": "zU46L",
-                      "name": "histContent1",
-                      "width": "fill_container",
-                      "layout": "vertical",
-                      "gap": 4,
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "Zy8kW",
-                          "name": "histUrl1",
-                          "fill": "#FFFFFF",
-                          "content": "github.com",
-                          "fontFamily": "Inter",
-                          "fontSize": 14,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "wyI4R",
-                          "name": "histTime1",
-                          "fill": "#64748B",
-                          "content": "Today at 2:34 PM",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 12,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "HhLQl",
-                  "name": "historyItem2",
-                  "width": "fill_container",
-                  "fill": "#1E293B",
-                  "cornerRadius": 12,
-                  "gap": 12,
-                  "padding": 16,
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "9n9cS",
-                      "name": "histIcon2",
-                      "fill": "#F59E0B",
-                      "content": "⚠",
-                      "fontFamily": "Inter",
-                      "fontSize": 20,
-                      "fontWeight": "normal"
-                    },
-                    {
-                      "type": "frame",
-                      "id": "UjuWc",
-                      "name": "histContent2",
-                      "width": "fill_container",
-                      "layout": "vertical",
-                      "gap": 4,
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "vY421",
-                          "name": "histUrl2",
-                          "fill": "#FFFFFF",
-                          "content": "suspicious-link.net",
-                          "fontFamily": "Inter",
-                          "fontSize": 14,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "ekBFE",
-                          "name": "histTime2",
-                          "fill": "#64748B",
-                          "content": "Yesterday at 6:12 PM",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 12,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "uXfga",
-                  "name": "historyItem3",
-                  "width": "fill_container",
-                  "fill": "#1E293B",
-                  "cornerRadius": 12,
-                  "gap": 12,
-                  "padding": 16,
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "Yy8mQ",
-                      "name": "histIcon3",
-                      "fill": "#EF4444",
-                      "content": "✗",
-                      "fontFamily": "Inter",
-                      "fontSize": 20,
-                      "fontWeight": "normal"
-                    },
-                    {
-                      "type": "frame",
-                      "id": "Psw1T",
-                      "name": "histContent3",
-                      "width": "fill_container",
-                      "layout": "vertical",
-                      "gap": 4,
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "EQDwE",
-                          "name": "histUrl3",
-                          "fill": "#FFFFFF",
-                          "content": "phishing-scam.xyz",
-                          "fontFamily": "Inter",
-                          "fontSize": 14,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "Oa9sS",
-                          "name": "histTime3",
-                          "fill": "#64748B",
-                          "content": "Feb 19 at 11:45 AM",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 12,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "frame",
-      "id": "nB7Oo",
-      "x": 450,
-      "y": 1044,
-      "name": "loginScreen",
-      "clip": true,
-      "width": 402,
-      "height": 874,
-      "fill": "#0A0F1C",
-      "layout": "vertical",
-      "children": [
-        {
-          "type": "frame",
-          "id": "IwPRV",
-          "name": "loginStatusBar",
-          "width": "fill_container",
-          "padding": [
-            16,
-            24
-          ],
-          "children": [
-            {
-              "type": "text",
-              "id": "mEwas",
-              "name": "loginTime",
-              "fill": "#FFFFFF",
-              "content": "9:41",
-              "fontFamily": "Inter",
-              "fontSize": 14,
-              "fontWeight": "normal"
+              "type": "Subtitle",
+              "text": "Sign in to protect yourself from cyber threats",
+              "style": "fontSize: 14, color: #94A3B8",
+              "marginTop": 8
             }
           ]
         },
         {
-          "type": "frame",
-          "id": "HImkx",
-          "name": "loginContent",
-          "width": "fill_container",
-          "layout": "vertical",
+          "type": "Form",
+          "marginTop": 32,
           "gap": 20,
-          "padding": [
-            12,
-            24,
-            24,
-            24
-          ],
           "children": [
             {
-              "type": "frame",
-              "id": "lfhAt",
-              "name": "loginElementalBg",
-              "width": "fill_container",
-              "height": 70,
-              "fill": "rgba(59, 130, 246, 0.08)",
-              "cornerRadius": 20,
-              "gap": 12,
-              "padding": 15,
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "SDU06",
-                  "name": "loginDecor1",
-                  "width": 50,
-                  "height": 50,
-                  "fill": "rgba(16, 185, 129, 0.2)",
-                  "cornerRadius": 25
-                },
-                {
-                  "type": "frame",
-                  "id": "IN3G3",
-                  "name": "loginDecor2",
-                  "width": 35,
-                  "height": 35,
-                  "fill": "rgba(59, 130, 246, 0.15)",
-                  "cornerRadius": 18
-                },
-                {
-                  "type": "frame",
-                  "id": "lpmUZ",
-                  "name": "loginDecor3",
-                  "width": 45,
-                  "height": 45,
-                  "fill": "rgba(16, 185, 129, 0.15)",
-                  "cornerRadius": 23
-                }
-              ]
+              "type": "Input Group",
+              "label": "Email Address",
+              "icon": "<Mail />",
+              "iconSize": 20,
+              "iconColor": "#64748B",
+              "input": {
+                "placeholder": "Enter your email",
+                "keyboardType": "email-address",
+                "autoCapitalize": "none",
+                "style": "background: #1E293B, border: 1px rgba(148, 163, 184, 0.2), borderRadius: 12, padding: 16, color: #FFFFFF"
+              }
             },
             {
-              "type": "frame",
-              "id": "izYcA",
-              "name": "loginHeader",
-              "width": "fill_container",
-              "layout": "vertical",
-              "gap": 16,
-              "children": [
-                {
-                  "type": "text",
-                  "id": "Bss18",
-                  "name": "loginTitle",
-                  "fill": "#FFFFFF",
-                  "content": "PhishGuard 🌊",
-                  "fontFamily": "Inter",
-                  "fontSize": 32,
-                  "fontWeight": "normal"
-                },
-                {
-                  "type": "text",
-                  "id": "Nf3HD",
-                  "name": "loginSubtitle",
-                  "fill": "#94A3B8",
-                  "content": "Protect yourself from cyber threats 🛡️",
-                  "fontFamily": "Inter",
-                  "fontSize": 14,
-                  "fontWeight": "normal"
-                }
-              ]
+              "type": "Input Group",
+              "label": "Password",
+              "icon": "<Lock />",
+              "iconSize": 20,
+              "iconColor": "#64748B",
+              "input": {
+                "placeholder": "Enter your password",
+                "secureTextEntry": true,
+                "style": "background: #1E293B, border: 1px rgba(148, 163, 184, 0.2), borderRadius: 12, padding: 16, color: #FFFFFF"
+              }
             },
             {
-              "type": "frame",
-              "id": "pkbCG",
-              "name": "formSection",
-              "width": "fill_container",
-              "layout": "vertical",
-              "gap": 20,
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "ELDF3",
-                  "name": "emailContainer",
-                  "width": "fill_container",
-                  "layout": "vertical",
-                  "gap": 8,
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "hYoNw",
-                      "name": "emailLabel",
-                      "fill": "#FFFFFF",
-                      "content": "💧 Email Address",
-                      "fontFamily": "Inter",
-                      "fontSize": 14,
-                      "fontWeight": "normal"
-                    },
-                    {
-                      "type": "frame",
-                      "id": "HLLg0",
-                      "name": "emailInput",
-                      "width": "fill_container",
-                      "height": 50,
-                      "fill": "#0F172A",
-                      "cornerRadius": 12,
-                      "padding": 16,
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "S4ADR",
-                          "name": "emailPlaceholder",
-                          "fill": "#64748B",
-                          "content": "you@example.com",
-                          "fontFamily": "Inter",
-                          "fontSize": 15,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "lfERA",
-                  "name": "passwordContainer",
-                  "width": "fill_container",
-                  "layout": "vertical",
-                  "gap": 8,
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "vNak9",
-                      "name": "passwordLabel",
-                      "fill": "#FFFFFF",
-                      "content": "🔒 Password",
-                      "fontFamily": "Inter",
-                      "fontSize": 14,
-                      "fontWeight": "normal"
-                    },
-                    {
-                      "type": "frame",
-                      "id": "dYaIc",
-                      "name": "passwordInput",
-                      "width": "fill_container",
-                      "height": 50,
-                      "fill": "#0F172A",
-                      "cornerRadius": 12,
-                      "padding": 16,
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "Xortr",
-                          "name": "passwordPlaceholder",
-                          "fill": "#64748B",
-                          "content": "••••••••",
-                          "fontFamily": "Inter",
-                          "fontSize": 15,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "text",
-              "id": "Hmm1I",
-              "name": "forgotPassword",
-              "fill": "#10B981",
-              "content": "Forgot password?",
-              "fontFamily": "Inter",
-              "fontSize": 13,
-              "fontWeight": "normal"
-            },
-            {
-              "type": "frame",
-              "id": "mKRZP",
-              "name": "loginButton",
-              "width": "fill_container",
-              "height": 56,
-              "fill": "#10B981",
-              "cornerRadius": 12,
-              "padding": [
-                16,
-                0
-              ],
-              "children": [
-                {
-                  "type": "text",
-                  "id": "HUZq5",
-                  "name": "loginButtonText",
-                  "fill": "#FFFFFF",
-                  "textGrowth": "fixed-width-height",
-                  "width": "fill_container",
-                  "height": "fill_container",
-                  "content": "Sign In 🌊",
-                  "textAlign": "center",
-                  "textAlignVertical": "middle",
-                  "fontFamily": "Inter",
-                  "fontSize": 16,
-                  "fontWeight": "700"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "bn6Yc",
-              "name": "dividerContainer",
-              "width": "fill_container",
-              "height": "fill_container",
-              "gap": 16,
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "A8yfv",
-                  "name": "dividerLine1",
-                  "width": 100,
-                  "height": 1,
-                  "fill": "#0F172A"
-                },
-                {
-                  "type": "text",
-                  "id": "k7ugI",
-                  "name": "dividerText",
-                  "fill": "#64748B",
-                  "textGrowth": "fixed-width",
-                  "width": 17,
-                  "content": "OR",
-                  "textAlign": "center",
-                  "textAlignVertical": "middle",
-                  "fontFamily": "Inter",
-                  "fontSize": 12,
-                  "fontWeight": "normal"
-                },
-                {
-                  "type": "frame",
-                  "id": "lFzv2",
-                  "name": "dividerLine2",
-                  "width": 100,
-                  "height": 1,
-                  "fill": "#0F172A"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "hRPEp",
-              "name": "registerButton",
-              "width": "fill_container",
-              "height": 56,
-              "fill": "#1E293B",
-              "cornerRadius": 12,
-              "padding": [
-                16,
-                0
-              ],
-              "children": [
-                {
-                  "type": "text",
-                  "id": "eUrvI",
-                  "name": "registerButtonText",
-                  "fill": "#FFFFFF",
-                  "textGrowth": "fixed-width",
-                  "width": "fill_container",
-                  "content": "Create Account 🌿",
-                  "textAlign": "center",
-                  "textAlignVertical": "middle",
-                  "fontFamily": "Inter",
-                  "fontSize": 16,
-                  "fontWeight": "700"
-                }
-              ]
-            },
-            {
-              "type": "text",
-              "id": "ZFWls",
-              "name": "footerText",
-              "fill": "#64748B",
-              "content": "By continuing, you agree to our Terms & Privacy Policy",
-              "fontFamily": "Inter",
-              "fontSize": 11,
-              "fontWeight": "normal"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "frame",
-      "id": "E5NXv",
-      "x": 0,
-      "y": 1044,
-      "name": "settingsScreen",
-      "clip": true,
-      "width": 402,
-      "height": 874,
-      "fill": "#0A0F1C",
-      "layout": "vertical",
-      "children": [
-        {
-          "type": "frame",
-          "id": "pWxtE",
-          "name": "settingsStatusBar",
-          "width": "fill_container",
-          "padding": [
-            16,
-            24
-          ],
-          "children": [
-            {
-              "type": "text",
-              "id": "M3QIC",
-              "name": "settingsTime",
-              "fill": "#FFFFFF",
-              "content": "9:41",
-              "fontFamily": "Inter",
-              "fontSize": 14,
-              "fontWeight": "normal"
+              "type": "Link",
+              "text": "Forgot password?",
+              "style": "fontSize: 13, color: #10B981",
+              "align": "right"
             }
           ]
         },
         {
-          "type": "frame",
-          "id": "vtYpx",
-          "name": "settingsContent",
-          "width": "fill_container",
-          "layout": "vertical",
-          "gap": 20,
-          "padding": [
-            12,
-            24,
-            24,
-            24
-          ],
+          "type": "Button",
+          "variant": "primary",
+          "marginTop": 24,
+          "style": "background: #10B981, borderRadius: 12, padding: 16, shadowColor: #10B981, shadowOpacity: 0.3, shadowRadius: 8",
           "children": [
             {
-              "type": "frame",
-              "id": "1Vpaq",
-              "name": "settingsHeader",
-              "width": "fill_container",
+              "type": "Text",
+              "text": "Sign In",
+              "style": "fontSize: 16, fontWeight: 700, color: #FFFFFF, letterSpacing: 0.5"
+            },
+            {
+              "type": "Icon",
+              "component": "<ArrowRight />",
+              "size": 20,
+              "color": "#FFFFFF",
+              "marginLeft": 8
+            }
+          ]
+        },
+        {
+          "type": "Divider",
+          "marginTop": 24,
+          "text": "OR",
+          "style": "color: #64748B"
+        },
+        {
+          "type": "Button",
+          "variant": "outline",
+          "marginTop": 16,
+          "style": "background: transparent, border: 2px #10B981, borderRadius: 12, padding: 16",
+          "children": [
+            {
+              "type": "Icon",
+              "component": "<UserPlus />",
+              "size": 20,
+              "color": "#10B981",
+              "marginRight": 8
+            },
+            {
+              "type": "Text",
+              "text": "Create Account",
+              "style": "fontSize: 16, fontWeight: 700, color: #10B981, letterSpacing: 0.5"
+            }
+          ]
+        },
+        {
+          "type": "Footer",
+          "marginTop": 24,
+          "align": "center",
+          "children": [
+            {
+              "type": "Text",
+              "text": "By continuing, you agree to our Terms & Privacy Policy",
+              "style": "fontSize: 11, color: #64748B, textAlign: center"
+            }
+          ]
+        }
+      ],
+      "lucideIcons": ["Shield (Logo)", "Mail (Email input)", "Lock (Password input)", "ArrowRight (Sign in button)", "UserPlus (Create account button)"]
+    },
+    {
+      "id": "SCREEN_REGISTER",
+      "name": "Register Screen",
+      "route": "/(auth)/register",
+      "file": "app/(auth)/register.tsx",
+      "description": "Complete registration form with validation and professional icons",
+      "position": {"x": 850, "y": 0},
+      "size": {"width": 375, "height": 812},
+      "background": "Linear Gradient: #0A0F1C → #0F172A → #1E293B",
+      "layout": {
+        "padding": "24px",
+        "gap": "20px",
+        "scrollable": true
+      },
+      "elements": [
+        {
+          "type": "Logo Section",
+          "marginTop": 32,
+          "align": "center",
+          "children": [
+            {
+              "type": "Logo Circle",
+              "size": "96x96",
+              "background": "rgba(16, 185, 129, 0.15)",
+              "border": "2px rgba(16, 185, 129, 0.3)",
+              "borderRadius": 48,
               "children": [
                 {
-                  "type": "text",
-                  "id": "S41Hg",
-                  "name": "backButton",
-                  "fill": "#FFFFFF",
-                  "content": "←",
-                  "fontFamily": "Inter",
-                  "fontSize": 24,
-                  "fontWeight": "normal"
-                },
-                {
-                  "type": "text",
-                  "id": "rpw5y",
-                  "name": "settingsTitle",
-                  "fill": "#FFFFFF",
-                  "content": "⚙️ Settings",
-                  "fontFamily": "Inter",
-                  "fontSize": 24,
-                  "fontWeight": "normal"
-                },
-                {
-                  "type": "frame",
-                  "id": "RknRF",
-                  "name": "placeholderSpace",
-                  "width": 24,
-                  "height": 24
+                  "type": "Icon",
+                  "component": "<Shield />",
+                  "size": 48,
+                  "color": "#10B981"
                 }
               ]
             },
             {
-              "type": "frame",
-              "id": "9MwJ7",
-              "name": "profileCard",
-              "width": "fill_container",
-              "fill": "#1E293B",
-              "cornerRadius": 16,
-              "gap": 12,
+              "type": "Text",
+              "text": "PhishGuard",
+              "style": "fontSize: 28, fontWeight: 800, color: #FFFFFF, letterSpacing: 1",
+              "marginTop": 16
+            }
+          ]
+        },
+        {
+          "type": "Header",
+          "marginTop": 24,
+          "children": [
+            {
+              "type": "Title",
+              "text": "Create Account",
+              "style": "fontSize: 28, fontWeight: 700, color: #FFFFFF"
+            },
+            {
+              "type": "Subtitle",
+              "text": "Join PhishGuard and protect yourself from cyber threats",
+              "style": "fontSize: 14, color: #94A3B8",
+              "marginTop": 8
+            }
+          ]
+        },
+        {
+          "type": "Form",
+          "marginTop": 24,
+          "gap": 16,
+          "children": [
+            {
+              "type": "Input Group",
+              "label": "Full Name",
+              "icon": "<User />",
+              "iconSize": 20,
+              "iconColor": "#64748B",
+              "input": {
+                "placeholder": "Enter your full name",
+                "style": "background: #1E293B, border: 1px rgba(148, 163, 184, 0.2), borderRadius: 12, padding: 16, color: #FFFFFF"
+              }
+            },
+            {
+              "type": "Input Group",
+              "label": "Email Address",
+              "icon": "<Mail />",
+              "iconSize": 20,
+              "iconColor": "#64748B",
+              "input": {
+                "placeholder": "Enter your email",
+                "keyboardType": "email-address",
+                "autoCapitalize": "none",
+                "style": "background: #1E293B, border: 1px rgba(148, 163, 184, 0.2), borderRadius: 12, padding: 16, color: #FFFFFF"
+              }
+            },
+            {
+              "type": "Input Group",
+              "label": "Password",
+              "icon": "<Lock />",
+              "iconSize": 20,
+              "iconColor": "#64748B",
+              "input": {
+                "placeholder": "Create a strong password",
+                "secureTextEntry": true,
+                "style": "background: #1E293B, border: 1px rgba(148, 163, 184, 0.2), borderRadius: 12, padding: 16, color: #FFFFFF"
+              }
+            },
+            {
+              "type": "Input Group",
+              "label": "Confirm Password",
+              "icon": "<KeyRound />",
+              "iconSize": 20,
+              "iconColor": "#64748B",
+              "input": {
+                "placeholder": "Confirm your password",
+                "secureTextEntry": true,
+                "style": "background: #1E293B, border: 1px rgba(148, 163, 184, 0.2), borderRadius: 12, padding: 16, color: #FFFFFF"
+              }
+            },
+            {
+              "type": "Checkbox",
+              "marginTop": 8,
+              "children": [
+                {
+                  "type": "Checkbox Box",
+                  "size": "24x24",
+                  "background": "#10B981",
+                  "borderRadius": 6,
+                  "children": [
+                    {
+                      "type": "Icon",
+                      "component": "✓",
+                      "color": "#0A0F1C"
+                    }
+                  ]
+                },
+                {
+                  "type": "Text",
+                  "text": "I agree to Terms of Service & Privacy Policy",
+                  "style": "fontSize: 13, color: #94A3B8",
+                  "marginLeft": 12
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Button",
+          "variant": "primary",
+          "marginTop": 24,
+          "style": "background: #10B981, borderRadius: 12, padding: 16, shadowColor: #10B981, shadowOpacity: 0.3, shadowRadius: 8",
+          "children": [
+            {
+              "type": "Text",
+              "text": "Create Account",
+              "style": "fontSize: 16, fontWeight: 700, color: #FFFFFF, letterSpacing: 0.5"
+            },
+            {
+              "type": "Icon",
+              "component": "<ArrowRight />",
+              "size": 20,
+              "color": "#FFFFFF",
+              "marginLeft": 8
+            }
+          ]
+        },
+        {
+          "type": "Link Container",
+          "marginTop": 20,
+          "align": "center",
+          "children": [
+            {
+              "type": "Icon",
+              "component": "<LogIn />",
+              "size": 16,
+              "color": "#10B981",
+              "marginRight": 8
+            },
+            {
+              "type": "Text",
+              "text": "Already have an account? ",
+              "style": "fontSize: 13, color: #94A3B8"
+            },
+            {
+              "type": "Link",
+              "text": "Sign In",
+              "style": "fontSize: 13, fontWeight: 600, color: #10B981"
+            }
+          ]
+        }
+      ],
+      "lucideIcons": ["Shield (Logo)", "User (Name input)", "Mail (Email input)", "Lock (Password input)", "KeyRound (Confirm password)", "ArrowRight (Create button)", "LogIn (Sign in link)"],
+      "validation": ["Name: Required", "Email: Valid email format", "Password: Minimum 6 characters", "Confirm Password: Must match password", "Terms: Must be checked"]
+    },
+    {
+      "id": "SCREEN_HOME",
+      "name": "Home / Dashboard Screen",
+      "route": "/(tabs)/index",
+      "file": "app/(tabs)/index.tsx",
+      "description": "Main dashboard with URL analysis, stats, and recent scans",
+      "position": {"x": 0, "y": 862},
+      "size": {"width": 375, "height": 812},
+      "background": "Linear Gradient: #0A0F1C → #0F172A → #1E293B",
+      "layout": {
+        "padding": "24px",
+        "gap": "24px",
+        "scrollable": true
+      },
+      "elements": [
+        {
+          "type": "Header",
+          "marginTop": 16,
+          "children": [
+            {
+              "type": "Greeting",
+              "children": [
+                {
+                  "type": "Icon",
+                  "component": "<Shield />",
+                  "size": 24,
+                  "color": "#10B981",
+                  "marginRight": 12
+                },
+                {
+                  "type": "Text",
+                  "text": "Hello, {userName}",
+                  "style": "fontSize: 24, fontWeight: 700, color: #FFFFFF"
+                }
+              ]
+            },
+            {
+              "type": "Subtitle",
+              "text": "Stay protected from phishing threats",
+              "style": "fontSize: 14, color: #94A3B8",
+              "marginTop": 4
+            }
+          ]
+        },
+        {
+          "type": "Stats Grid",
+          "marginTop": 24,
+          "layout": "grid (2 columns)",
+          "gap": 16,
+          "children": [
+            {
+              "type": "Stat Card",
+              "background": "#1E293B",
+              "borderRadius": 16,
               "padding": 16,
               "children": [
                 {
-                  "type": "frame",
-                  "id": "oSKsu",
-                  "name": "profileAvatar",
-                  "width": 64,
-                  "height": 64,
-                  "fill": "#10B981",
-                  "cornerRadius": 32,
-                  "layout": "vertical",
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "5jVEG",
-                      "name": "avatarText",
-                      "fill": "#FFFFFF",
-                      "content": "A",
-                      "fontFamily": "Inter",
-                      "fontSize": 24,
-                      "fontWeight": "normal"
-                    }
-                  ]
+                  "type": "Icon",
+                  "component": "<ShieldCheck />",
+                  "size": 32,
+                  "color": "#10B981"
                 },
                 {
-                  "type": "frame",
-                  "id": "gVLfU",
-                  "name": "profileInfo",
-                  "layout": "vertical",
-                  "gap": 4,
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "w3zL9",
-                      "name": "profileName",
-                      "fill": "#FFFFFF",
-                      "content": "Ayushman 🌿",
-                      "fontFamily": "Inter",
-                      "fontSize": 18,
-                      "fontWeight": "normal"
-                    },
-                    {
-                      "type": "text",
-                      "id": "xzUAd",
-                      "name": "profileEmail",
-                      "fill": "#94A3B8",
-                      "content": "ayushman@gmail.com",
-                      "fontFamily": "Inter",
-                      "fontSize": 14,
-                      "fontWeight": "normal"
-                    }
-                  ]
+                  "type": "Value",
+                  "text": "{threatsBlocked}",
+                  "style": "fontSize: 28, fontWeight: 700, color: #FFFFFF",
+                  "marginTop": 12
+                },
+                {
+                  "type": "Label",
+                  "text": "Threats Blocked",
+                  "style": "fontSize: 12, color: #64748B",
+                  "marginTop": 4
                 }
               ]
             },
             {
-              "type": "frame",
-              "id": "TPyZd",
-              "name": "accountSection",
-              "width": "fill_container",
-              "layout": "vertical",
-              "gap": 10,
+              "type": "Stat Card",
+              "background": "#1E293B",
+              "borderRadius": 16,
+              "padding": 16,
               "children": [
                 {
-                  "type": "text",
-                  "id": "2XWbQ",
-                  "name": "accountTitle",
-                  "fill": "#64748B",
-                  "content": "🌍 ACCOUNT",
-                  "fontFamily": "Inter",
-                  "fontSize": 12,
-                  "fontWeight": "normal",
-                  "letterSpacing": 1
+                  "type": "Icon",
+                  "component": "<BarChart3 />",
+                  "size": 32,
+                  "color": "#10B981"
                 },
                 {
-                  "type": "frame",
-                  "id": "fpy2U",
-                  "name": "editProfileOption",
-                  "width": "fill_container",
-                  "fill": "#1E293B",
-                  "cornerRadius": 12,
-                  "padding": 16,
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "dk6B4",
-                      "name": "editProfileLabel",
-                      "fill": "#FFFFFF",
-                      "content": "✏️ Edit Profile",
-                      "fontFamily": "Inter",
-                      "fontSize": 15,
-                      "fontWeight": "normal"
-                    },
-                    {
-                      "type": "text",
-                      "id": "f3Sto",
-                      "name": "editProfileArrow",
-                      "fill": "#64748B",
-                      "content": "→",
-                      "fontFamily": "Inter",
-                      "fontSize": 16,
-                      "fontWeight": "normal"
-                    }
-                  ]
+                  "type": "Value",
+                  "text": "{totalScans}",
+                  "style": "fontSize: 28, fontWeight: 700, color: #FFFFFF",
+                  "marginTop": 12
                 },
                 {
-                  "type": "frame",
-                  "id": "hcBgc",
-                  "name": "changePasswordOption",
-                  "width": "fill_container",
-                  "fill": "#1E293B",
-                  "cornerRadius": 12,
-                  "padding": 16,
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "LC83f",
-                      "name": "changePasswordLabel",
-                      "fill": "#FFFFFF",
-                      "content": "🔒 Change Password",
-                      "fontFamily": "Inter",
-                      "fontSize": 15,
-                      "fontWeight": "normal"
-                    },
-                    {
-                      "type": "text",
-                      "id": "PA7oF",
-                      "name": "changePasswordArrow",
-                      "fill": "#64748B",
-                      "content": "→",
-                      "fontFamily": "Inter",
-                      "fontSize": 16,
-                      "fontWeight": "normal"
-                    }
-                  ]
+                  "type": "Label",
+                  "text": "Total Scans",
+                  "style": "fontSize: 12, color: #64748B",
+                  "marginTop": 4
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "id": "2PROh",
-              "name": "securitySection",
-              "width": "fill_container",
-              "layout": "vertical",
-              "gap": 10,
-              "children": [
-                {
-                  "type": "text",
-                  "id": "BynZt",
-                  "name": "securityTitle",
-                  "fill": "#64748B",
-                  "content": "🔒 SECURITY",
-                  "fontFamily": "Inter",
-                  "fontSize": 12,
-                  "fontWeight": "normal",
-                  "letterSpacing": 1
-                },
-                {
-                  "type": "frame",
-                  "id": "9R4B9",
-                  "name": "twoFactorAuthOption",
-                  "width": "fill_container",
-                  "fill": "#1E293B",
-                  "cornerRadius": 12,
-                  "gap": 10,
-                  "padding": 16,
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "b5ax1",
-                      "name": "twoFactorLabel",
-                      "fill": "#FFFFFF",
-                      "content": "🔐 Two-Factor Authentication",
-                      "fontFamily": "Inter",
-                      "fontSize": 15,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "hEr1p",
-                  "name": "scanHistoryOption",
-                  "width": "fill_container",
-                  "fill": "#1E293B",
-                  "cornerRadius": 12,
-                  "padding": 16,
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "SdjvA",
-                      "name": "scanHistoryLabel",
-                      "fill": "#FFFFFF",
-                      "content": "📊 Scan History",
-                      "fontFamily": "Inter",
-                      "fontSize": 15,
-                      "fontWeight": "normal"
-                    },
-                    {
-                      "type": "text",
-                      "id": "mBHqv",
-                      "name": "scanHistoryArrow",
-                      "fill": "#64748B",
-                      "content": "→",
-                      "fontFamily": "Inter",
-                      "fontSize": 16,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "G2K3g",
-              "name": "preferencesSection",
-              "width": "fill_container",
-              "layout": "vertical",
-              "gap": 10,
-              "children": [
-                {
-                  "type": "text",
-                  "id": "i7oNx",
-                  "name": "preferencesTitle",
-                  "fill": "#64748B",
-                  "content": "🎨 PREFERENCES",
-                  "fontFamily": "Inter",
-                  "fontSize": 12,
-                  "fontWeight": "normal",
-                  "letterSpacing": 1
-                },
-                {
-                  "type": "frame",
-                  "id": "t2CEA",
-                  "name": "notificationsOption",
-                  "width": "fill_container",
-                  "fill": "#1E293B",
-                  "cornerRadius": 12,
-                  "gap": 10,
-                  "padding": 16,
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "cdB23",
-                      "name": "notificationsLabel",
-                      "fill": "#FFFFFF",
-                      "content": "🔔 Notifications",
-                      "fontFamily": "Inter",
-                      "fontSize": 15,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "dg1Hb",
-                  "name": "darkModeOption",
-                  "width": "fill_container",
-                  "fill": "#1E293B",
-                  "cornerRadius": 12,
-                  "gap": 10,
-                  "padding": 16,
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "bOYJv",
-                      "name": "darkModeLabel",
-                      "fill": "#FFFFFF",
-                      "content": "🌙 Dark Mode",
-                      "fontFamily": "Inter",
-                      "fontSize": 15,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "3ztJ1",
-              "name": "logoutButton",
-              "width": "fill_container",
-              "height": 56,
-              "fill": "rgba(239, 68, 68, 0.15)",
-              "cornerRadius": 12,
-              "padding": [
-                16,
-                0
-              ],
-              "children": [
-                {
-                  "type": "text",
-                  "id": "wwzSb",
-                  "name": "logoutText",
-                  "fill": "#EF4444",
-                  "content": "🚪 Logout",
-                  "textAlign": "center",
-                  "fontFamily": "Inter",
-                  "fontSize": 16,
-                  "fontWeight": "normal"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "frame",
-      "id": "onAmv",
-      "x": 900,
-      "y": 1044,
-      "name": "Register",
-      "width": 402,
-      "height": 874,
-      "fill": "#0A0F1C",
-      "layout": "vertical",
-      "children": [
-        {
-          "type": "frame",
-          "id": "ZOBuq",
-          "name": "registerStatusBar",
-          "width": "fill_container",
-          "height": 49,
-          "gap": 12,
-          "padding": [
-            16,
-            24
-          ],
-          "children": [
-            {
-              "type": "text",
-              "id": "ao3rH",
-              "name": "timeText",
-              "fill": "#FFFFFF",
-              "content": "9:41",
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "normal"
             }
           ]
         },
         {
-          "type": "frame",
-          "id": "ghWvd",
-          "name": "registerContent",
-          "width": "fill_container",
-          "layout": "vertical",
-          "gap": 16,
-          "padding": [
-            12,
-            24,
-            24,
-            24
-          ],
+          "type": "URL Analysis Section",
+          "marginTop": 32,
+          "background": "#1E293B",
+          "borderRadius": 16,
+          "padding": 20,
           "children": [
             {
-              "type": "frame",
-              "id": "xTGCZ",
-              "name": "registerElementalBg",
-              "width": "fill_container",
-              "height": 70,
-              "fill": "rgba(16, 185, 129, 0.08)",
-              "cornerRadius": 20,
+              "type": "Section Title",
+              "children": [
+                {
+                  "type": "Icon",
+                  "component": "<Search />",
+                  "size": 20,
+                  "color": "#10B981",
+                  "marginRight": 8
+                },
+                {
+                  "type": "Text",
+                  "text": "Analyze URL",
+                  "style": "fontSize: 18, fontWeight: 600, color: #FFFFFF"
+                }
+              ]
+            },
+            {
+              "type": "Input",
+              "marginTop": 16,
+              "placeholder": "Enter URL to analyze",
+              "style": "background: #0F172A, border: 1px rgba(148, 163, 184, 0.2), borderRadius: 12, padding: 16, color: #FFFFFF"
+            },
+            {
+              "type": "Button",
+              "marginTop": 16,
+              "style": "background: #10B981, borderRadius: 12, padding: 16, shadowColor: #10B981, shadowOpacity: 0.3",
+              "children": [
+                {
+                  "type": "Icon",
+                  "component": "<Search />",
+                  "size": 20,
+                  "color": "#FFFFFF",
+                  "marginRight": 8
+                },
+                {
+                  "type": "Text",
+                  "text": "Analyze URL",
+                  "style": "fontSize: 16, fontWeight: 700, color: #FFFFFF"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Recent Scans Section",
+          "marginTop": 24,
+          "children": [
+            {
+              "type": "Section Header",
+              "children": [
+                {
+                  "type": "Text",
+                  "text": "Recent Scans",
+                  "style": "fontSize: 18, fontWeight: 600, color: #FFFFFF"
+                },
+                {
+                  "type": "Link",
+                  "text": "View All",
+                  "style": "fontSize: 14, color: #10B981"
+                }
+              ]
+            },
+            {
+              "type": "Scan List",
+              "marginTop": 12,
               "gap": 12,
-              "padding": 15,
               "children": [
                 {
-                  "type": "frame",
-                  "id": "Eym3F",
-                  "name": "registerDecor1",
-                  "width": 50,
-                  "height": 50,
-                  "fill": "rgba(16, 185, 129, 0.2)",
-                  "cornerRadius": 25
-                },
-                {
-                  "type": "frame",
-                  "id": "zJD2g",
-                  "name": "registerDecor2",
-                  "width": 35,
-                  "height": 35,
-                  "fill": "rgba(59, 130, 246, 0.15)",
-                  "cornerRadius": 18
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "g2JfQ",
-              "name": "registerHeader",
-              "width": "fill_container",
-              "layout": "vertical",
-              "gap": 8,
-              "children": [
-                {
-                  "type": "text",
-                  "id": "wAEjr",
-                  "name": "title",
-                  "fill": "#FFFFFF",
-                  "content": "Create Account 🌿",
-                  "fontFamily": "Inter",
-                  "fontSize": 28,
-                  "fontWeight": "normal"
-                },
-                {
-                  "type": "text",
-                  "id": "yWsf6",
-                  "name": "subtitle",
-                  "fill": "#94A3B8",
-                  "content": "Join PhishGuard community",
-                  "fontFamily": "Inter",
-                  "fontSize": 14,
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "n4ZrD",
-              "name": "registerFormSection",
-              "width": "fill_container",
-              "layout": "vertical",
-              "gap": 16,
-              "children": [
-                {
-                  "type": "text",
-                  "id": "UZmAe",
-                  "name": "nameLabel",
-                  "fill": "#FFFFFF",
-                  "content": "👤 Full Name",
-                  "fontFamily": "Inter",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "frame",
-                  "id": "TaSsC",
-                  "name": "nameInputField",
-                  "width": "fill_container",
-                  "height": 48,
-                  "fill": "#1E293B",
-                  "cornerRadius": 12,
-                  "padding": [
-                    12,
-                    16
-                  ],
+                  "type": "Scan Item",
+                  "background": "#1E293B",
+                  "borderRadius": 12,
+                  "padding": 16,
                   "children": [
                     {
-                      "type": "text",
-                      "id": "ofcw8",
-                      "name": "namePlaceholder",
-                      "fill": "#64748B",
-                      "content": "John Doe",
-                      "fontFamily": "Inter",
-                      "fontSize": 14,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "text",
-                  "id": "xEa2Z",
-                  "name": "emailLabel",
-                  "fill": "#FFFFFF",
-                  "content": "📧 Email Address",
-                  "fontFamily": "Inter",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "frame",
-                  "id": "4lUsi",
-                  "name": "emailInputField",
-                  "width": "fill_container",
-                  "height": 48,
-                  "fill": "#1E293B",
-                  "cornerRadius": 12,
-                  "padding": [
-                    12,
-                    16
-                  ],
-                  "children": [
+                      "type": "Icon",
+                      "component": "<CheckCircle />",
+                      "size": 24,
+                      "color": "#10B981"
+                    },
                     {
-                      "type": "text",
-                      "id": "TfgBv",
-                      "name": "emailPlaceholder",
-                      "fill": "#64748B",
-                      "content": "you@example.com",
-                      "fontFamily": "Inter",
-                      "fontSize": 14,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "text",
-                  "id": "qFfVy",
-                  "name": "passwordLabel",
-                  "fill": "#FFFFFF",
-                  "content": "🔐 Password",
-                  "fontFamily": "Inter",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "frame",
-                  "id": "WqTkq",
-                  "name": "passwordInputField",
-                  "width": "fill_container",
-                  "height": 48,
-                  "fill": "#1E293B",
-                  "cornerRadius": 12,
-                  "padding": [
-                    12,
-                    16
-                  ],
-                  "children": [
+                      "type": "Details",
+                      "children": [
+                        {
+                          "type": "URL",
+                          "text": "google.com",
+                          "style": "fontSize: 14, fontWeight: 500, color: #FFFFFF"
+                        },
+                        {
+                          "type": "Time",
+                          "text": "2 min ago",
+                          "style": "fontSize: 12, color: #64748B"
+                        }
+                      ]
+                    },
                     {
-                      "type": "text",
-                      "id": "OwlCP",
-                      "name": "passwordPlaceholder",
-                      "fill": "#64748B",
-                      "content": "••••••••",
-                      "fontFamily": "Inter",
-                      "fontSize": 14,
-                      "fontWeight": "normal"
+                      "type": "Badge",
+                      "text": "Safe",
+                      "background": "rgba(16, 185, 129, 0.15)",
+                      "color": "#10B981",
+                      "borderRadius": 8,
+                      "padding": "4px 8px"
                     }
                   ]
-                },
-                {
-                  "type": "text",
-                  "id": "PyZj5",
-                  "name": "confirmLabel",
-                  "fill": "#FFFFFF",
-                  "content": "✓ Confirm Password",
-                  "fontFamily": "Inter",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "frame",
-                  "id": "tTEwR",
-                  "name": "confirmInputField",
-                  "width": "fill_container",
-                  "height": 48,
-                  "fill": "#1E293B",
-                  "cornerRadius": 12,
-                  "padding": [
-                    12,
-                    16
-                  ],
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "ePLeh",
-                      "name": "confirmPlaceholder",
-                      "fill": "#64748B",
-                      "content": "••••••••",
-                      "fontFamily": "Inter",
-                      "fontSize": 14,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "DiJ4J",
-              "name": "termsContainer",
-              "width": "fill_container",
-              "gap": 8,
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "lykOE",
-                  "name": "termsCheckbox",
-                  "width": 20,
-                  "height": 20,
-                  "fill": "#10B981",
-                  "cornerRadius": 4,
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "OwQwq",
-                      "name": "checkmark",
-                      "fill": "#0A0F1C",
-                      "content": "✓",
-                      "fontFamily": "Inter",
-                      "fontSize": 12,
-                      "fontWeight": "bold"
-                    }
-                  ]
-                },
-                {
-                  "type": "text",
-                  "id": "WuxRW",
-                  "name": "termsText",
-                  "fill": "#94A3B8",
-                  "content": "I agree to Terms & Privacy Policy",
-                  "fontFamily": "Inter",
-                  "fontSize": 12,
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "H5KKk",
-              "name": "registerButtonNew",
-              "width": "fill_container",
-              "height": 56,
-              "fill": "#10B981",
-              "cornerRadius": 12,
-              "layout": "vertical",
-              "padding": [
-                16,
-                0
-              ],
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "ILjxB",
-                  "name": "registerBtnText",
-                  "fill": "#FFFFFF",
-                  "content": "Create Account 🌿",
-                  "textAlign": "center",
-                  "textAlignVertical": "middle",
-                  "fontFamily": "Inter",
-                  "fontSize": 18,
-                  "fontWeight": "700"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "OxjJV",
-              "name": "signInLinkContainer",
-              "width": "fill_container",
-              "gap": 4,
-              "children": [
-                {
-                  "type": "text",
-                  "id": "7dVVL",
-                  "name": "signInLinkText",
-                  "fill": "#94A3B8",
-                  "content": "Already have an account? ",
-                  "fontFamily": "Inter",
-                  "fontSize": 13,
-                  "fontWeight": "normal"
-                },
-                {
-                  "type": "text",
-                  "id": "uELlt",
-                  "name": "signInLinkButton",
-                  "fill": "#10B981",
-                  "content": "Sign In",
-                  "fontFamily": "Inter",
-                  "fontSize": 13,
-                  "fontWeight": "600"
                 }
               ]
             }
           ]
         }
-      ]
+      ],
+      "bottomTabs": {
+        "activeTab": "Home",
+        "tabs": [
+          {"icon": "<Shield />", "label": "Home", "route": "/(tabs)/index"},
+          {"icon": "<History />", "label": "History", "route": "/(tabs)/history"},
+          {"icon": "<Settings />", "label": "Settings", "route": "/(tabs)/settings"}
+        ]
+      },
+      "lucideIcons": ["Shield", "ShieldCheck", "BarChart3", "Search", "CheckCircle", "AlertTriangle", "XCircle"]
+    },
+    {
+      "id": "SCREEN_HISTORY",
+      "name": "History Screen",
+      "route": "/(tabs)/history",
+      "file": "app/(tabs)/history.tsx",
+      "description": "Scan history with filtering and delete functionality",
+      "position": {"x": 425, "y": 862},
+      "size": {"width": 375, "height": 812},
+      "background": "Linear Gradient: #0A0F1C → #0F172A → #1E293B",
+      "layout": {
+        "padding": "24px",
+        "gap": "20px",
+        "scrollable": true
+      },
+      "elements": [
+        {
+          "type": "Header",
+          "marginTop": 16,
+          "children": [
+            {
+              "type": "Icon",
+              "component": "<History />",
+              "size": 24,
+              "color": "#10B981",
+              "marginRight": 12
+            },
+            {
+              "type": "Title",
+              "text": "Scan History",
+              "style": "fontSize: 28, fontWeight: 700, color: #FFFFFF"
+            }
+          ]
+        },
+        {
+          "type": "Subtitle",
+          "text": "View and manage all your past security scans",
+          "style": "fontSize: 14, color: #94A3B8"
+        },
+        {
+          "type": "Filter Buttons",
+          "marginTop": 24,
+          "layout": "horizontal",
+          "gap": 12,
+          "children": [
+            {
+              "type": "Button",
+              "variant": "active",
+              "text": "All",
+              "style": "background: #10B981, color: #0A0F1C, borderRadius: 20, padding: 10px 20px, fontSize: 13, fontWeight: 600"
+            },
+            {
+              "type": "Button",
+              "variant": "inactive",
+              "text": "Safe",
+              "style": "background: #1E293B, color: #94A3B8, borderRadius: 20, padding: 10px 20px, fontSize: 13"
+            },
+            {
+              "type": "Button",
+              "variant": "inactive",
+              "text": "Dangerous",
+              "style": "background: #1E293B, color: #94A3B8, borderRadius: 20, padding: 10px 20px, fontSize: 13"
+            }
+          ]
+        },
+        {
+          "type": "Scan List",
+          "marginTop": 20,
+          "gap": 12,
+          "children": [
+            {
+              "type": "Scan Item",
+              "background": "#1E293B",
+              "borderRadius": 12,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "Status Icon",
+                  "component": "<CheckCircle />",
+                  "size": 24,
+                  "color": "#10B981"
+                },
+                {
+                  "type": "Content",
+                  "flex": 1,
+                  "children": [
+                    {
+                      "type": "URL",
+                      "text": "google.com",
+                      "style": "fontSize: 15, fontWeight: 500, color: #FFFFFF"
+                    },
+                    {
+                      "type": "Status",
+                      "text": "Safe · Today at 2:34 PM",
+                      "style": "fontSize: 12, color: #64748B",
+                      "marginTop": 4
+                    }
+                  ]
+                },
+                {
+                  "type": "Delete Button",
+                  "component": "<Trash2 />",
+                  "size": 20,
+                  "color": "#EF4444",
+                  "onPress": "Delete scan"
+                }
+              ]
+            },
+            {
+              "type": "Scan Item",
+              "background": "#1E293B",
+              "borderRadius": 12,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "Status Icon",
+                  "component": "<AlertTriangle />",
+                  "size": 24,
+                  "color": "#F59E0B"
+                },
+                {
+                  "type": "Content",
+                  "flex": 1,
+                  "children": [
+                    {
+                      "type": "URL",
+                      "text": "suspicious-site.net",
+                      "style": "fontSize: 15, fontWeight: 500, color: #FFFFFF"
+                    },
+                    {
+                      "type": "Status",
+                      "text": "Warning · Yesterday at 5:12 PM",
+                      "style": "fontSize: 12, color: #F59E0B",
+                      "marginTop": 4
+                    }
+                  ]
+                },
+                {
+                  "type": "Delete Button",
+                  "component": "<Trash2 />",
+                  "size": 20,
+                  "color": "#EF4444"
+                }
+              ]
+            },
+            {
+              "type": "Scan Item",
+              "background": "#1E293B",
+              "borderRadius": 12,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "Status Icon",
+                  "component": "<XCircle />",
+                  "size": 24,
+                  "color": "#EF4444"
+                },
+                {
+                  "type": "Content",
+                  "flex": 1,
+                  "children": [
+                    {
+                      "type": "URL",
+                      "text": "phishing-trap.xyz",
+                      "style": "fontSize: 15, fontWeight: 500, color: #FFFFFF"
+                    },
+                    {
+                      "type": "Status",
+                      "text": "Dangerous · Feb 19 at 11:45 AM",
+                      "style": "fontSize: 12, color: #EF4444",
+                      "marginTop": 4
+                    }
+                  ]
+                },
+                {
+                  "type": "Delete Button",
+                  "component": "<Trash2 />",
+                  "size": 20,
+                  "color": "#EF4444"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Empty State",
+          "display": "when no scans",
+          "children": [
+            {
+              "type": "Icon",
+              "component": "<FileX />",
+              "size": 64,
+              "color": "#64748B"
+            },
+            {
+              "type": "Text",
+              "text": "No scans found",
+              "style": "fontSize: 16, color: #94A3B8",
+              "marginTop": 16
+            }
+          ]
+        }
+      ],
+      "bottomTabs": {
+        "activeTab": "History"
+      },
+      "lucideIcons": ["History", "CheckCircle", "AlertTriangle", "XCircle", "Trash2", "FileX"],
+      "features": ["Filter by status", "Delete individual scans", "Real-time data from backend", "Pull to refresh"]
+    },
+    {
+      "id": "SCREEN_SETTINGS",
+      "name": "Settings Screen",
+      "route": "/(tabs)/settings",
+      "file": "app/(tabs)/settings.tsx",
+      "description": "User profile, statistics, preferences, and logout",
+      "position": {"x": 850, "y": 862},
+      "size": {"width": 375, "height": 812},
+      "background": "Linear Gradient: #0A0F1C → #0F172A → #1E293B",
+      "layout": {
+        "padding": "24px",
+        "gap": "24px",
+        "scrollable": true
+      },
+      "elements": [
+        {
+          "type": "Header",
+          "marginTop": 16,
+          "children": [
+            {
+              "type": "Icon",
+              "component": "<Settings />",
+              "size": 24,
+              "color": "#10B981",
+              "marginRight": 12
+            },
+            {
+              "type": "Title",
+              "text": "Settings",
+              "style": "fontSize: 28, fontWeight: 700, color: #FFFFFF"
+            }
+          ]
+        },
+        {
+          "type": "Profile Card",
+          "marginTop": 24,
+          "background": "#1E293B",
+          "borderRadius": 16,
+          "padding": 20,
+          "children": [
+            {
+              "type": "Avatar",
+              "size": "64x64",
+              "background": "rgba(16, 185, 129, 0.15)",
+              "border": "2px rgba(16, 185, 129, 0.3)",
+              "borderRadius": 32,
+              "children": [
+                {
+                  "type": "Icon",
+                  "component": "<UserCircle />",
+                  "size": 32,
+                  "color": "#10B981"
+                }
+              ]
+            },
+            {
+              "type": "User Info",
+              "marginLeft": 16,
+              "children": [
+                {
+                  "type": "Name",
+                  "text": "{user.name}",
+                  "style": "fontSize: 18, fontWeight: 600, color: #FFFFFF"
+                },
+                {
+                  "type": "Email",
+                  "text": "{user.email}",
+                  "style": "fontSize: 14, color: #94A3B8",
+                  "marginTop": 4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Stats Grid",
+          "marginTop": 20,
+          "layout": "grid (2 columns)",
+          "gap": 16,
+          "children": [
+            {
+              "type": "Stat Card",
+              "background": "#1E293B",
+              "borderRadius": 12,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "Value",
+                  "text": "{totalScans}",
+                  "style": "fontSize: 24, fontWeight: 700, color: #FFFFFF"
+                },
+                {
+                  "type": "Label",
+                  "text": "Total Scans",
+                  "style": "fontSize: 12, color: #64748B",
+                  "marginTop": 4
+                }
+              ]
+            },
+            {
+              "type": "Stat Card",
+              "background": "#1E293B",
+              "borderRadius": 12,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "Value",
+                  "text": "{threatsBlocked}",
+                  "style": "fontSize: 24, fontWeight: 700, color: #FFFFFF"
+                },
+                {
+                  "type": "Label",
+                  "text": "Threats Blocked",
+                  "style": "fontSize: 12, color: #64748B",
+                  "marginTop": 4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Section",
+          "marginTop": 32,
+          "children": [
+            {
+              "type": "Section Title",
+              "children": [
+                {
+                  "type": "Icon",
+                  "component": "<Globe />",
+                  "size": 16,
+                  "color": "#64748B",
+                  "marginRight": 8
+                },
+                {
+                  "type": "Text",
+                  "text": "ACCOUNT",
+                  "style": "fontSize: 12, fontWeight: 600, color: #64748B, letterSpacing: 1"
+                }
+              ]
+            },
+            {
+              "type": "Menu Items",
+              "marginTop": 12,
+              "gap": 8,
+              "children": [
+                {
+                  "type": "Menu Item",
+                  "background": "#1E293B",
+                  "borderRadius": 12,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "Icon",
+                      "component": "<Edit />",
+                      "size": 20,
+                      "color": "#FFFFFF",
+                      "marginRight": 12
+                    },
+                    {
+                      "type": "Text",
+                      "text": "Edit Profile",
+                      "style": "fontSize: 15, color: #FFFFFF"
+                    },
+                    {
+                      "type": "Icon",
+                      "component": "<ChevronRight />",
+                      "size": 20,
+                      "color": "#64748B",
+                      "marginLeft": "auto"
+                    }
+                  ]
+                },
+                {
+                  "type": "Menu Item",
+                  "background": "#1E293B",
+                  "borderRadius": 12,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "Icon",
+                      "component": "<Lock />",
+                      "size": 20,
+                      "color": "#FFFFFF",
+                      "marginRight": 12
+                    },
+                    {
+                      "type": "Text",
+                      "text": "Change Password",
+                      "style": "fontSize: 15, color: #FFFFFF"
+                    },
+                    {
+                      "type": "Icon",
+                      "component": "<ChevronRight />",
+                      "size": 20,
+                      "color": "#64748B",
+                      "marginLeft": "auto"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Section",
+          "marginTop": 24,
+          "children": [
+            {
+              "type": "Section Title",
+              "children": [
+                {
+                  "type": "Icon",
+                  "component": "<ShieldCheck />",
+                  "size": 16,
+                  "color": "#64748B",
+                  "marginRight": 8
+                },
+                {
+                  "type": "Text",
+                  "text": "SECURITY",
+                  "style": "fontSize: 12, fontWeight: 600, color: #64748B, letterSpacing: 1"
+                }
+              ]
+            },
+            {
+              "type": "Menu Items",
+              "marginTop": 12,
+              "gap": 8,
+              "children": [
+                {
+                  "type": "Menu Item",
+                  "background": "#1E293B",
+                  "borderRadius": 12,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "Icon",
+                      "component": "<ShieldCheck />",
+                      "size": 20,
+                      "color": "#FFFFFF",
+                      "marginRight": 12
+                    },
+                    {
+                      "type": "Text",
+                      "text": "Two-Factor Authentication",
+                      "style": "fontSize: 15, color: #FFFFFF"
+                    }
+                  ]
+                },
+                {
+                  "type": "Menu Item",
+                  "background": "#1E293B",
+                  "borderRadius": 12,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "Icon",
+                      "component": "<BarChart />",
+                      "size": 20,
+                      "color": "#FFFFFF",
+                      "marginRight": 12
+                    },
+                    {
+                      "type": "Text",
+                      "text": "Scan History",
+                      "style": "fontSize: 15, color: #FFFFFF"
+                    },
+                    {
+                      "type": "Icon",
+                      "component": "<ChevronRight />",
+                      "size": 20,
+                      "color": "#64748B",
+                      "marginLeft": "auto"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Section",
+          "marginTop": 24,
+          "children": [
+            {
+              "type": "Section Title",
+              "children": [
+                {
+                  "type": "Icon",
+                  "component": "<Palette />",
+                  "size": 16,
+                  "color": "#64748B",
+                  "marginRight": 8
+                },
+                {
+                  "type": "Text",
+                  "text": "PREFERENCES",
+                  "style": "fontSize: 12, fontWeight: 600, color: #64748B, letterSpacing: 1"
+                }
+              ]
+            },
+            {
+              "type": "Menu Items",
+              "marginTop": 12,
+              "gap": 8,
+              "children": [
+                {
+                  "type": "Menu Item",
+                  "background": "#1E293B",
+                  "borderRadius": 12,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "Icon",
+                      "component": "<Bell />",
+                      "size": 20,
+                      "color": "#FFFFFF",
+                      "marginRight": 12
+                    },
+                    {
+                      "type": "Text",
+                      "text": "Notifications",
+                      "style": "fontSize: 15, color: #FFFFFF"
+                    }
+                  ]
+                },
+                {
+                  "type": "Menu Item",
+                  "background": "#1E293B",
+                  "borderRadius": 12,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "Icon",
+                      "component": "<Moon />",
+                      "size": 20,
+                      "color": "#FFFFFF",
+                      "marginRight": 12
+                    },
+                    {
+                      "type": "Text",
+                      "text": "Dark Mode",
+                      "style": "fontSize: 15, color: #FFFFFF"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Logout Button",
+          "marginTop": 32,
+          "background": "rgba(239, 68, 68, 0.15)",
+          "border": "1px #EF4444",
+          "borderRadius": 12,
+          "padding": 16,
+          "children": [
+            {
+              "type": "Icon",
+              "component": "<LogOut />",
+              "size": 20,
+              "color": "#EF4444",
+              "marginRight": 12
+            },
+            {
+              "type": "Text",
+              "text": "Logout",
+              "style": "fontSize: 16, fontWeight: 600, color: #EF4444"
+            }
+          ]
+        }
+      ],
+      "bottomTabs": {
+        "activeTab": "Settings"
+      },
+      "lucideIcons": ["Settings", "UserCircle", "Globe", "Edit", "Lock", "ShieldCheck", "BarChart", "Palette", "Bell", "Moon", "LogOut", "ChevronRight"],
+      "features": ["Display user profile", "Real-time stats", "Navigate to history", "Logout with confirmation"]
     }
+  ],
+  "components": {
+    "Logo": {
+      "description": "Shield icon in circular container",
+      "structure": "96x96 circle → rgba(16, 185, 129, 0.15) bg → 2px border → Shield icon 48px"
+    },
+    "Input": {
+      "description": "Input field with left-aligned icon",
+      "structure": "Container → Icon (20px left) → TextInput → Border radius 12px"
+    },
+    "Button": {
+      "primary": "Background #10B981, shadow, border radius 12px",
+      "outline": "Border 2px #10B981, transparent bg, border radius 12px"
+    },
+    "StatCard": {
+      "description": "Statistics display card",
+      "structure": "Background #1E293B → Icon → Value → Label"
+    },
+    "MenuItem": {
+      "description": "Settings menu item",
+      "structure": "Background #1E293B → Left Icon → Label → Right Chevron"
+    }
+  },
+  "implementationNotes": {
+    "authentication": "AsyncStorage-based local auth, no server-side sessions",
+    "navigation": "expo-router file-based routing with (auth) and (tabs) groups",
+    "backend": "FastAPI on port 8000, PocketBase on port 8090",
+    "frontend": "React Native Expo on port 8081",
+    "icons": "lucide-react-native package",
+    "state": "AppContext provider with useApp() hook",
+    "apiClient": "Custom fetch-based API client in config/api.ts"
+  },
+  "lucideIconsUsed": [
+    "Shield - Logo and home tab",
+    "Mail - Email input fields",
+    "Lock - Password input fields",
+    "User - Name input field",
+    "KeyRound - Confirm password field",
+    "ArrowRight - Primary action buttons",
+    "UserPlus - Create account button",
+    "LogIn - Sign in link",
+    "ShieldCheck - Protection status",
+    "BarChart3 - Statistics",
+    "Search - URL analysis",
+    "CheckCircle - Safe scans",
+    "AlertTriangle - Warning scans",
+    "XCircle - Dangerous scans",
+    "Trash2 - Delete button",
+    "History - History tab",
+    "Settings - Settings tab",
+    "UserCircle - User avatar",
+    "Globe - Account section",
+    "Edit - Edit profile",
+    "Palette - Preferences",
+    "Bell - Notifications",
+    "Moon - Dark mode",
+    "LogOut - Logout button",
+    "ChevronRight - Navigation arrows",
+    "FileX - Empty state"
   ]
 }

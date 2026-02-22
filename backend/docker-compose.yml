@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # PhishGuard FastAPI Backend
+  api:
+    build: .
+    container_name: phishguard-api
+    ports:
+      - "8000:8000"
+    environment:
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_KEY=${SUPABASE_KEY}
+      - API_PORT=8000
+      - DEBUG=False
+    volumes:
+      - .:/app
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: PostgreSQL database (if using local database)
+  # Uncomment if you want to use a local database instead of Supabase
+  # db:
+  #   image: postgres:15-alpine
+  #   container_name: phishguard-db
+  #   environment:
+  #     POSTGRES_DB: phishguard
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   restart: unless-stopped
+
+# volumes:
+#   postgres_data:
+
+# Networks
+networks:
+  default:
+    name: phishguard-network
