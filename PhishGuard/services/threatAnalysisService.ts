@@ -43,58 +43,132 @@ export const analyzeUrl = async (
  * Fallback local analysis when backend is unavailable
  */
 const fallbackAnalysis = (url: string): AnalysisResult => {
-  const suspiciousPatterns = [
+  const normalizedUrl = url.startsWith('http') ? url : `https://${url}`;
+  let parsedUrl: URL | null = null;
+
+  try {
+    parsedUrl = new URL(normalizedUrl);
+  } catch {
+    return {
+      url,
+      status: 'dangerous',
+      riskScore: 85,
+      threats: ['Invalid or malformed URL'],
+      timestamp: new Date().toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
+    };
+  }
+
+  const hostname = parsedUrl.hostname.toLowerCase();
+  const pathname = parsedUrl.pathname.toLowerCase();
+  const search = parsedUrl.search.toLowerCase();
+  const fullLower = normalizedUrl.toLowerCase();
+
+  let riskScore = 0;
+  const threats: string[] = [];
+
+  const suspiciousBrands = [
     'paypal',
     'amazon',
     'apple',
     'google',
     'microsoft',
     'bank',
+    'secure',
+    'wallet',
+    'crypto',
   ];
 
-  const phishingIndicators = [
+  const phishingKeywords = [
     'verify',
     'confirm',
     'update',
     'urgent',
     'click',
     'redirect',
-    'phishing',
+    'signin',
+    'login',
+    'password',
+    'account',
   ];
 
-  const urlLower = url.toLowerCase();
-  let riskScore = 0;
-  const threats: string[] = [];
+  const suspiciousTlds = ['.tk', '.ml', '.ga', '.cf', '.xyz', '.top'];
 
-  // Check for suspicious patterns
-  if (suspiciousPatterns.some((p) => urlLower.includes(p))) {
-    riskScore += 20;
-    threats.push('Mimics legitimate service');
-  }
-
-  // Check for phishing indicators
-  if (phishingIndicators.some((p) => urlLower.includes(p))) {
+  const isIpHost = /^\d+\.\d+\.\d+\.\d+$/.test(hostname);
+  if (isIpHost) {
     riskScore += 30;
-    threats.push('Contains phishing keywords');
+    threats.push('Uses an IP address instead of a domain');
   }
 
-  // Check URL structure
-  if (urlLower.includes('..') || urlLower.includes('//')) {
-    riskScore += 25;
-    threats.push('Suspicious URL structure');
-  }
-
-  // Check for HTTPS
-  if (!urlLower.startsWith('https')) {
+  if (!normalizedUrl.startsWith('https://')) {
     riskScore += 15;
     threats.push('No HTTPS encryption');
   }
 
-  // Determine status
+  if (hostname.split('.').length >= 4) {
+    riskScore += 10;
+    threats.push('Excessive subdomains');
+  }
+
+  if (suspiciousTlds.some((tld) => hostname.endsWith(tld))) {
+    riskScore += 20;
+    threats.push('Suspicious top-level domain');
+  }
+
+  if (suspiciousBrands.some((brand) => hostname.includes(brand))) {
+    riskScore += 18;
+    threats.push('Possible brand impersonation');
+  }
+
+  if (phishingKeywords.some((keyword) => pathname.includes(keyword) || search.includes(keyword))) {
+    riskScore += 22;
+    threats.push('Contains phishing keywords');
+  }
+
+  if (fullLower.includes('@')) {
+    riskScore += 25;
+    threats.push('URL contains "@" symbol');
+  }
+
+  if (fullLower.includes('..') || fullLower.includes('\\')) {
+    riskScore += 20;
+    threats.push('Suspicious URL structure');
+  }
+
+  if (fullLower.includes('%00') || fullLower.includes('%2e%2e')) {
+    riskScore += 20;
+    threats.push('Encoded traversal patterns');
+  }
+
+  const dashCount = (hostname.match(/-/g) || []).length;
+  if (dashCount >= 3) {
+    riskScore += 12;
+    threats.push('Excessive dashes in domain');
+  }
+
+  if (hostname.length > 30 || normalizedUrl.length > 75) {
+    riskScore += 10;
+    threats.push('Unusually long URL');
+  }
+
+  if (fullLower.includes('http://') && fullLower.includes('https://')) {
+    riskScore += 15;
+    threats.push('Multiple protocols in URL');
+  }
+
+  if (pathname.includes('//')) {
+    riskScore += 10;
+    threats.push('Suspicious path structure');
+  }
+
+  const riskScoreCapped = Math.min(riskScore, 100);
   let status: 'safe' | 'warning' | 'dangerous';
-  if (riskScore >= 60) {
+
+  if (riskScoreCapped >= 60) {
     status = 'dangerous';
-  } else if (riskScore >= 30) {
+  } else if (riskScoreCapped >= 30) {
     status = 'warning';
   } else {
     status = 'safe';
@@ -103,8 +177,8 @@ const fallbackAnalysis = (url: string): AnalysisResult => {
   return {
     url,
     status,
-    riskScore: Math.min(riskScore, 100),
-    threats: threats.slice(0, 3), // Limit to 3 threats
+    riskScore: riskScoreCapped,
+    threats: threats.slice(0, 3),
     timestamp: new Date().toLocaleTimeString('en-US', {
       hour: '2-digit',
       minute: '2-digit',
