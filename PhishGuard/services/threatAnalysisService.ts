@@ -444,7 +444,7 @@ const fallbackAnalysis = async (url: string): Promise<AnalysisResult> => {
 
   const suspiciousTlds = ['.tk', '.ml', '.ga', '.cf', '.xyz', '.top', '.gq', '.pw'];
 
-  // Zphisher/tunneling service detection
+  // Zphisher/tunneling service detection (CRITICAL for phishing)
   const tunnelingServices = [
     'ngrok.io',
     'ngrok-free.app',
@@ -456,22 +456,20 @@ const fallbackAnalysis = async (url: string): Promise<AnalysisResult> => {
     'tunnelto.dev',
     'localtunnel.me',
     'trycloudflare.com',
-    'cloudflare.com',
     'tunnel.me',
-    'serveo.net',
   ];
 
   const isTunnelingService = tunnelingServices.some((service) => hostname.includes(service));
   
   if (isTunnelingService) {
-    riskScore += 40; // Increased from 35
-    threats.push('Tunneling service detected (high phishing risk)');
+    riskScore += 50; // Increased from 40 - tunneling = almost always phishing
+    threats.push('Tunneling service (high phishing risk)');
     
     // Extra penalty if it's a random subdomain (common zphisher pattern)
     const subdomain = hostname.split('.')[0];
     if (subdomain.includes('-') && subdomain.split('-').length >= 3) {
-      riskScore += 15;
-      threats.push('Random subdomain pattern');
+      riskScore += 20; // Increased from 15
+      threats.push('Suspicious subdomain pattern');
     }
   }
 
@@ -560,9 +558,9 @@ const fallbackAnalysis = async (url: string): Promise<AnalysisResult> => {
   const riskScoreCapped = Math.min(riskScore, 100);
   let status: 'safe' | 'warning' | 'dangerous';
 
-  if (riskScoreCapped >= 60) {
+  if (riskScoreCapped >= 50) {
     status = 'dangerous';
-  } else if (riskScoreCapped >= 30) {
+  } else if (riskScoreCapped >= 25) {
     status = 'warning';
   } else {
     status = 'safe';
