@@ -1899,15 +1899,6 @@
                       "fontFamily": "Inter",
                       "fontSize": 15,
                       "fontWeight": "normal"
-                    },
-                    {
-                      "type": "frame",
-                      "id": "VMXFL",
-                      "name": "twoFactorToggle",
-                      "width": 44,
-                      "height": 24,
-                      "fill": "#10B981",
-                      "cornerRadius": 12
                     }
                   ]
                 },
@@ -1982,15 +1973,6 @@
                       "fontFamily": "Inter",
                       "fontSize": 15,
                       "fontWeight": "normal"
-                    },
-                    {
-                      "type": "frame",
-                      "id": "PsnrZ",
-                      "name": "notificationsToggle",
-                      "width": 44,
-                      "height": 24,
-                      "fill": "#10B981",
-                      "cornerRadius": 12
                     }
                   ]
                 },
@@ -2013,16 +1995,6 @@
                       "fontFamily": "Inter",
                       "fontSize": 15,
                       "fontWeight": "normal"
-                    },
-                    {
-                      "type": "frame",
-                      "id": "Nvjra",
-                      "name": "darkModeToggle",
-                      "width": 44,
-                      "height": 24,
-                      "fill": "#10B981",
-                      "cornerRadius": 12,
-                      "gap": 5
                     }
                   ]
                 }
@@ -2333,6 +2305,8 @@
                   "height": 20,
                   "fill": "#10B981",
                   "cornerRadius": 4,
+                  "justifyContent": "center",
+                  "alignItems": "center",
                   "children": [
                     {
                       "type": "text",
