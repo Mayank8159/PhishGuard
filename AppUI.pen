@@ -170,6 +170,8 @@
                         16,
                         0
                       ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
                       "children": [
                         {
                           "type": "text",
@@ -181,8 +183,8 @@
                           "content": "🔍 Analyze URL 💧",
                           "textAlign": "center",
                           "fontFamily": "Inter",
-                          "fontSize": 16,
-                          "fontWeight": "700"
+                          "fontSize": 18,
+                          "fontWeight": "800"
                         }
                       ]
                     }
