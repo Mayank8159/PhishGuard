@@ -126,16 +126,186 @@ export const analyzeUrl = async (
     console.error('Analysis error:', error);
 
     // Fallback: Local analysis if backend is down
-    const result = fallbackAnalysis(url);
+    const result = await fallbackAnalysis(url);
     await saveLocalScan(userId, result);
     return result;
   }
 };
 
 /**
+ * Scrape webpage content for phishing analysis
+ */
+const scrapeWebpage = async (url: string): Promise<{
+  html: string;
+  title: string;
+  forms: number;
+  externalLinks: number;
+  suspiciousScripts: boolean;
+} | null> => {
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+      },
+      signal: controller.signal,
+    });
+
+    clearTimeout(timeoutId);
+
+    if (!response.ok) {
+      console.warn(`Failed to scrape ${url}: ${response.status}`);
+      return null;
+    }
+
+    const html = await response.text();
+    const htmlLower = html.toLowerCase();
+
+    // Extract title
+    const titleMatch = htmlLower.match(/<title[^>]*>(.*?)<\/title>/);
+    const title = titleMatch ? titleMatch[1].trim() : '';
+
+    // Count forms (phishing sites often have login forms)
+    const formMatches = htmlLower.match(/<form/g);
+    const forms = formMatches ? formMatches.length : 0;
+
+    // Count external links (suspicious if excessive)
+    const linkMatches = html.match(/<a[^>]+href\s*=\s*["']https?:\/\//gi);
+    const externalLinks = linkMatches ? linkMatches.length : 0;
+
+    // Check for suspicious scripts
+    const suspiciousScripts =
+      htmlLower.includes('eval(') ||
+      htmlLower.includes('atob(') ||
+      htmlLower.includes('document.write(') ||
+      htmlLower.includes('fromcharcode') ||
+      htmlLower.includes('unescape(');
+
+    return {
+      html: htmlLower,
+      title,
+      forms,
+      externalLinks,
+      suspiciousScripts,
+    };
+  } catch (error) {
+    console.warn('Scraping failed:', error);
+    return null;
+  }
+};
+
+/**
+ * Analyze scraped content for phishing indicators
+ */
+const analyzeScrapedContent = (
+  scraped: {
+    html: string;
+    title: string;
+    forms: number;
+    externalLinks: number;
+    suspiciousScripts: boolean;
+  },
+  url: string
+): { score: number; threats: string[] } => {
+  let score = 0;
+  const threats: string[] = [];
+
+  const html = scraped.html;
+
+  // Check for password/login forms
+  if (html.includes('type="password"') || html.includes("type='password'")) {
+    if (scraped.forms >= 2) {
+      score += 20;
+      threats.push('Multiple password forms detected');
+    } else if (scraped.forms === 1) {
+      score += 8;
+    }
+  }
+
+  // Suspicious scripts
+  if (scraped.suspiciousScripts) {
+    score += 25;
+    threats.push('Suspicious JavaScript detected');
+  }
+
+  // Check for excessive external links (content scraping)
+  if (scraped.externalLinks > 20) {
+    score += 12;
+    threats.push('Excessive external links');
+  }
+
+  // Hidden iframes (common in phishing)
+  if (html.includes('<iframe') && (html.includes('hidden') || html.includes('display:none'))) {
+    score += 18;
+    threats.push('Hidden iframe detected');
+  }
+
+  // Check for common phishing phrases
+  const phishingPhrases = [
+    'verify your account',
+    'suspended account',
+    'unusual activity',
+    'confirm your identity',
+    'update payment',
+    'claim your prize',
+    'urgent action required',
+    'click here immediately',
+    'limited time offer',
+    'account will be closed',
+  ];
+
+  const foundPhrases = phishingPhrases.filter((phrase) => html.includes(phrase));
+  if (foundPhrases.length >= 2) {
+    score += 20;
+    threats.push('Phishing language detected');
+  } else if (foundPhrases.length === 1) {
+    score += 10;
+  }
+
+  // Check for misleading title
+  const suspiciousBrands = [
+    'paypal',
+    'amazon',
+    'apple',
+    'google',
+    'microsoft',
+    'bank',
+    'netflix',
+    'facebook',
+  ];
+
+  const titleLower = scraped.title.toLowerCase();
+  const hasBrandInTitle = suspiciousBrands.some((brand) => titleLower.includes(brand));
+  const hasBrandInUrl = suspiciousBrands.some((brand) => url.toLowerCase().includes(brand));
+
+  if (hasBrandInTitle && !hasBrandInUrl) {
+    score += 22;
+    threats.push('Title mimics trusted brand');
+  }
+
+  // Check for no SSL but collecting sensitive data
+  if (!url.startsWith('https://') && html.includes('type="password"')) {
+    score += 30;
+    threats.push('Password form without HTTPS');
+  }
+
+  // Homograph/lookalike detection in title
+  const homographs = ['раypal', 'g00gle', 'αpple', 'micr0soft'];
+  if (homographs.some((h) => titleLower.includes(h))) {
+    score += 20;
+    threats.push('Lookalike brand name');
+  }
+
+  return { score, threats };
+};
+
+/**
  * Fallback local analysis when backend is unavailable
  */
-const fallbackAnalysis = (url: string): AnalysisResult => {
+const fallbackAnalysis = async (url: string): Promise<AnalysisResult> => {
   const normalizedUrl = url.startsWith('http') ? url : `https://${url}`;
   let parsedUrl: URL | null = null;
 
@@ -263,6 +433,14 @@ const fallbackAnalysis = (url: string): AnalysisResult => {
     threats.push('Suspicious path structure');
   }
 
+  // **Scrape webpage content for deeper analysis**
+  const scraped = await scrapeWebpage(normalizedUrl);
+  if (scraped) {
+    const contentAnalysis = analyzeScrapedContent(scraped, normalizedUrl);
+    riskScore += contentAnalysis.score;
+    threats.push(...contentAnalysis.threats);
+  }
+
   const riskScoreCapped = Math.min(riskScore, 100);
   let status: 'safe' | 'warning' | 'dangerous';
 
@@ -278,7 +456,7 @@ const fallbackAnalysis = (url: string): AnalysisResult => {
     url,
     status,
     riskScore: riskScoreCapped,
-    threats: threats.slice(0, 3),
+    threats: threats.slice(0, 4), // Increased from 3 to 4 to show more threats
     timestamp: new Date().toLocaleTimeString('en-US', {
       hour: '2-digit',
       minute: '2-digit',
