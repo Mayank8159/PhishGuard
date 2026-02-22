@@ -30,7 +30,8 @@ class Database:
             return False
     
     def is_connected(self) -> bool:
-        """Check if database is connected"""
+        """Check if database is connected (re-test each time)"""
+        self.is_connected_flag = self._test_connection()
         return self.is_connected_flag
     
     def insert_scan(

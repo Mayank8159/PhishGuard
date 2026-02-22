@@ -58,12 +58,6 @@ export default function TabLayout() {
           tabBarIcon: ({ color }: { color: string }) => <Settings size={24} color={color} />,
         }}
       />
-      <Tabs.Screen
-        name="two"
-        options={{
-          href: null, // Hide this tab
-        }}
-      />
     </Tabs>
   );
 }
