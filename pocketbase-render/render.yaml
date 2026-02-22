@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: pocketbase
+    env: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    disk:
+      name: pb-data
+      mountPath: /pb/pb_data
+      sizeGB: 1
+    envVars: []
