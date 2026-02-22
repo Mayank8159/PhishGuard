@@ -67,7 +67,8 @@ class Database:
                 {"user_id": user_id},
                 {
                     "$inc": {"total_scans": 1, "threats_blocked": 1 if status == "dangerous" else 0},
-                    "$set": {"last_scan": datetime.utcnow()}
+                    "$set": {"last_scan": datetime.utcnow(), "protection_active": True},
+                    "$setOnInsert": {"background_scans": 0}
                 },
                 upsert=True
             )
@@ -114,12 +115,16 @@ class Database:
         """Get user statistics"""
         try:
             scans = list(self.scans_collection.find({"user_id": user_id}))
+            user_doc = self.users_collection.find_one({"user_id": user_id}) or {}
             
             stats = {
                 "safe": 0,
                 "warning": 0,
                 "dangerous": 0,
-                "total": len(scans)
+                "total": len(scans),
+                "background_scans": user_doc.get("background_scans", 0),
+                "total_scans": user_doc.get("total_scans", len(scans)),
+                "protection_active": user_doc.get("protection_active", True)
             }
             
             for scan in scans:
@@ -130,7 +135,55 @@ class Database:
             return stats
         except Exception as e:
             logger.error(f"Error fetching stats: {e}")
-            return {"safe": 0, "warning": 0, "dangerous": 0, "total": 0}
+            return {
+                "safe": 0,
+                "warning": 0,
+                "dangerous": 0,
+                "total": 0,
+                "background_scans": 0,
+                "total_scans": 0,
+                "protection_active": True
+            }
+
+    def update_protection_status(self, user_id: str, enabled: bool) -> bool:
+        """Update protection status for a user"""
+        try:
+            result = self.users_collection.update_one(
+                {"user_id": user_id},
+                {"$set": {"protection_active": enabled, "updated_at": datetime.utcnow()}},
+                upsert=True
+            )
+            return result.modified_count > 0 or result.matched_count > 0
+        except Exception as e:
+            logger.error(f"Error updating protection status: {e}")
+            return False
+
+    def get_protection_status(self, user_id: str) -> Optional[bool]:
+        """Get protection status for a user"""
+        try:
+            user = self.users_collection.find_one({"user_id": user_id})
+            if not user:
+                return None
+            return user.get("protection_active", True)
+        except Exception as e:
+            logger.error(f"Error fetching protection status: {e}")
+            return None
+
+    def increment_background_scans(self, user_id: str, count: int = 1) -> bool:
+        """Increment background scan count"""
+        try:
+            result = self.users_collection.update_one(
+                {"user_id": user_id},
+                {
+                    "$inc": {"background_scans": count, "total_scans": count},
+                    "$set": {"last_scan": datetime.utcnow()}
+                },
+                upsert=True
+            )
+            return result.modified_count > 0 or result.matched_count > 0
+        except Exception as e:
+            logger.error(f"Error incrementing background scans: {e}")
+            return False
     
     def delete_scan(self, scan_id: str, user_id: str) -> bool:
         """Delete a scan record"""

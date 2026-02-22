@@ -74,6 +74,14 @@ class SecurityStats(BaseModel):
     protection_active: bool
 
 
+class ProtectionStatusRequest(BaseModel):
+    enabled: bool
+
+
+class BackgroundScanRequest(BaseModel):
+    count: int = 1
+
+
 class UserProfile(BaseModel):
     id: str
     email: str
@@ -259,15 +267,79 @@ async def get_user_stats(user_id: str):
         # Get scan history from PocketBase
         stats_data = db.get_user_stats(user_id)
 
+        total_scans = stats_data.get("total_scans", stats_data.get("total", 0))
+        background_scans = stats_data.get("background_scans", 0)
+
         return SecurityStats(
             threats_blocked=stats_data.get("dangerous", 0),
             safe_sites=stats_data.get("safe", 0),
-            scans_total=stats_data.get("total", 0),
-            protection_active=True
+            scans_total=max(total_scans, stats_data.get("total", 0) + background_scans),
+            protection_active=stats_data.get("protection_active", True)
         )
 
     except Exception as e:
         logger.error(f"Stats error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/user/{user_id}/protection", tags=["User"])
+async def get_protection_status(user_id: str):
+    """Get protection status"""
+    try:
+        if not db or not db.is_connected():
+            raise HTTPException(status_code=503, detail="Database not available")
+
+        status = db.get_protection_status(user_id)
+        if status is None:
+            status = True
+
+        return {"protection_active": status}
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Protection status error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/user/{user_id}/protection", tags=["User"])
+async def update_protection_status(user_id: str, payload: ProtectionStatusRequest):
+    """Update protection status"""
+    try:
+        if not db or not db.is_connected():
+            raise HTTPException(status_code=503, detail="Database not available")
+
+        success = db.update_protection_status(user_id, payload.enabled)
+        if success:
+            return {"protection_active": payload.enabled}
+
+        raise HTTPException(status_code=500, detail="Failed to update protection status")
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Protection update error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/user/{user_id}/background-scan", tags=["User"])
+async def record_background_scan(user_id: str, payload: BackgroundScanRequest):
+    """Record background scan count"""
+    try:
+        if not db or not db.is_connected():
+            raise HTTPException(status_code=503, detail="Database not available")
+
+        count = payload.count if payload.count > 0 else 1
+        success = db.increment_background_scans(user_id, count)
+        if success:
+            return {"message": "Background scan recorded", "count": count}
+
+        raise HTTPException(status_code=500, detail="Failed to record background scan")
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Background scan error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 

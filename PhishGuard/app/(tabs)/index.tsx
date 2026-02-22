@@ -16,7 +16,14 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Shield, Link, Search, Activity, ShieldCheck, CheckCircle, Zap, AlertTriangle, XCircle } from 'lucide-react-native';
-import { analyzeUrl, getRecentScans, getThreatStats } from '../../services/threatAnalysisService';
+import {
+  analyzeUrl,
+  getRecentScans,
+  getThreatStats,
+  getProtectionStatus,
+  setProtectionStatus,
+  recordBackgroundScan,
+} from '../../services/threatAnalysisService';
 import { useApp } from '../../contexts/AppContext';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -74,6 +81,14 @@ export default function PhishGuardDashboard() {
 
   const loadProtectionStatus = async () => {
     try {
+      if (user?.id) {
+        const remoteStatus = await getProtectionStatus(user.id);
+        if (remoteStatus !== null) {
+          setProtectionEnabled(remoteStatus);
+          await persistProtectionStatus(remoteStatus);
+          return;
+        }
+      }
       const storedValue = await AsyncStorage.getItem(
         getProtectionStorageKey(user?.id)
       );
@@ -99,6 +114,13 @@ export default function PhishGuardDashboard() {
   const applyProtectionToggle = async (enabled: boolean) => {
     setProtectionEnabled(enabled);
     await persistProtectionStatus(enabled);
+
+    if (user?.id) {
+      const synced = await setProtectionStatus(user.id, enabled);
+      if (!synced) {
+        console.warn('Protection status not synced, using local state.');
+      }
+    }
   };
 
   const handleProtectionToggle = () => {
@@ -218,7 +240,7 @@ export default function PhishGuardDashboard() {
     }
   };
 
-  const handleQuickScan = () => {
+  const handleQuickScan = async () => {
     if (!protectionEnabled) {
       Alert.alert('Protection Disabled', 'Enable Active Protection to run a quick scan.');
       return;
@@ -226,9 +248,7 @@ export default function PhishGuardDashboard() {
     Alert.alert('Quick Scan', 'Starting comprehensive device scan...\n\nThis may take a few minutes.');
     setTimeout(() => {
       Alert.alert('Scan Complete', `Scanned ${stats.scansTotal} URLs\n✓ All systems secure`);
-      if (user) {
-        loadData();
-      }
+      recordBackgroundScan(user?.id, 1).then(loadData);
     }, 3000);
   };
 

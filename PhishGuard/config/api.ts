@@ -3,7 +3,7 @@
  * Connects to FastAPI backend which uses PocketBase for data persistence
  */
 
-const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:8000/api';
+const API_BASE_URL ="https://phishguard-pf8j.onrender.com/api" ;
 
 /**
  * Make API calls to the backend
@@ -108,6 +108,15 @@ export interface SecurityStatsResponse {
   safe_sites: number;
   scans_total: number;
   protection_active: boolean;
+}
+
+export interface ProtectionStatusResponse {
+  protection_active: boolean;
+}
+
+export interface BackgroundScanResponse {
+  message: string;
+  count: number;
 }
 
 export interface ScanHistoryItem {

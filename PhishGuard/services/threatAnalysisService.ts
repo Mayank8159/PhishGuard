@@ -1,4 +1,13 @@
-import { api, AnalyzeResponse, ScanHistoryItem, SecurityStatsResponse, HealthResponse } from '../config/api';
+import {
+  api,
+  AnalyzeResponse,
+  ScanHistoryItem,
+  SecurityStatsResponse,
+  HealthResponse,
+  ProtectionStatusResponse,
+  BackgroundScanResponse,
+} from '../config/api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export interface AnalysisResult {
   url: string;
@@ -9,6 +18,82 @@ export interface AnalysisResult {
   id?: string;
   created_at?: string; // For compatibility with backend responses
 }
+
+const LOCAL_SCANS_KEY_PREFIX = 'phishguard_local_scans_';
+const LOCAL_BG_SCAN_KEY_PREFIX = 'phishguard_local_bg_scans_';
+const MAX_LOCAL_SCANS = 50;
+
+const getLocalScanKey = (userId?: string) => {
+  return `${LOCAL_SCANS_KEY_PREFIX}${userId ?? 'guest'}`;
+};
+
+const loadLocalScans = async (userId?: string): Promise<AnalysisResult[]> => {
+  try {
+    const stored = await AsyncStorage.getItem(getLocalScanKey(userId));
+    if (!stored) return [];
+    return JSON.parse(stored) as AnalysisResult[];
+  } catch (error) {
+    console.warn('Failed to load local scans:', error);
+    return [];
+  }
+};
+
+const saveLocalScan = async (userId: string | undefined, scan: AnalysisResult) => {
+  try {
+    const existing = await loadLocalScans(userId);
+    const updated = [scan, ...existing].slice(0, MAX_LOCAL_SCANS);
+    await AsyncStorage.setItem(getLocalScanKey(userId), JSON.stringify(updated));
+  } catch (error) {
+    console.warn('Failed to store local scan:', error);
+  }
+};
+
+const getLocalBgScanKey = (userId?: string) => {
+  return `${LOCAL_BG_SCAN_KEY_PREFIX}${userId ?? 'guest'}`;
+};
+
+const loadLocalBackgroundCount = async (userId?: string): Promise<number> => {
+  try {
+    const stored = await AsyncStorage.getItem(getLocalBgScanKey(userId));
+    if (!stored) return 0;
+    const parsed = Number.parseInt(stored, 10);
+    return Number.isNaN(parsed) ? 0 : parsed;
+  } catch (error) {
+    console.warn('Failed to load background scan count:', error);
+    return 0;
+  }
+};
+
+const incrementLocalBackgroundCount = async (userId?: string, count: number = 1) => {
+  try {
+    const current = await loadLocalBackgroundCount(userId);
+    const nextValue = current + count;
+    await AsyncStorage.setItem(getLocalBgScanKey(userId), String(nextValue));
+  } catch (error) {
+    console.warn('Failed to save background scan count:', error);
+  }
+};
+
+const computeLocalStats = async (scans: AnalysisResult[], userId?: string) => {
+  let threatsBlocked = 0;
+  let safeSites = 0;
+
+  for (const scan of scans) {
+    if (scan.status === 'dangerous') {
+      threatsBlocked += 1;
+    } else if (scan.status === 'safe') {
+      safeSites += 1;
+    }
+  }
+
+  const backgroundScans = await loadLocalBackgroundCount(userId);
+
+  return {
+    threatsBlocked,
+    safeSites,
+    scansTotal: scans.length + backgroundScans,
+  };
+};
 
 /**
  * Analyze a URL for phishing threats via backend API
@@ -24,18 +109,26 @@ export const analyzeUrl = async (
       user_id: userId,
     });
 
-    return {
+    const result = {
       url: response.url,
       status: response.status,
       riskScore: response.riskScore,
       threats: response.threats,
       timestamp: response.timestamp,
     };
+
+    if (!userId) {
+      await saveLocalScan(userId, result);
+    }
+
+    return result;
   } catch (error) {
     console.error('Analysis error:', error);
 
     // Fallback: Local analysis if backend is down
-    return fallbackAnalysis(url);
+    const result = fallbackAnalysis(url);
+    await saveLocalScan(userId, result);
+    return result;
   }
 };
 
@@ -148,9 +241,16 @@ const fallbackAnalysis = (url: string): AnalysisResult => {
     threats.push('Excessive dashes in domain');
   }
 
+  const hostSegments = hostname.split('.').filter(Boolean);
+  const wordlikeSegments = hostSegments.filter((segment) => segment.length >= 4);
   if (hostname.length > 30 || normalizedUrl.length > 75) {
     riskScore += 10;
     threats.push('Unusually long URL');
+  }
+
+  if (hostname.length >= 24 && wordlikeSegments.length >= 3) {
+    riskScore += 15;
+    threats.push('Long multi-word domain');
   }
 
   if (fullLower.includes('http://') && fullLower.includes('https://')) {
@@ -211,7 +311,8 @@ export const getRecentScans = async (
     }));
   } catch (error) {
     console.error('Error fetching scans:', error);
-    return [];
+    const localScans = await loadLocalScans(userId);
+    return localScans.slice(0, limit);
   }
 };
 
@@ -244,11 +345,62 @@ export const getThreatStats = async (
     };
   } catch (error) {
     console.error('Error fetching stats:', error);
-    return {
-      threatsBlocked: 0,
-      safeSites: 0,
-      scansTotal: 0,
-    };
+    const localScans = await loadLocalScans(userId);
+    return computeLocalStats(localScans, userId);
+  }
+};
+
+export const recordLocalScan = async (
+  userId: string | undefined,
+  scan: AnalysisResult
+): Promise<void> => {
+  await saveLocalScan(userId, scan);
+};
+
+export const getProtectionStatus = async (
+  userId: string
+): Promise<boolean | null> => {
+  try {
+    const response = await api.get<ProtectionStatusResponse>(`/user/${userId}/protection`);
+    return response.protection_active;
+  } catch (error) {
+    console.warn('Error fetching protection status:', error);
+    return null;
+  }
+};
+
+export const setProtectionStatus = async (
+  userId: string,
+  enabled: boolean
+): Promise<boolean> => {
+  try {
+    const response = await api.post<ProtectionStatusResponse>(
+      `/user/${userId}/protection`,
+      { enabled }
+    );
+    return response.protection_active === enabled;
+  } catch (error) {
+    console.warn('Error updating protection status:', error);
+    return false;
+  }
+};
+
+export const recordBackgroundScan = async (
+  userId: string | undefined,
+  count: number = 1
+): Promise<void> => {
+  if (!userId) {
+    await incrementLocalBackgroundCount(userId, count);
+    return;
+  }
+
+  try {
+    await api.post<BackgroundScanResponse>(`/user/${userId}/background-scan`, {
+      count,
+    });
+  } catch (error) {
+    console.warn('Error recording background scan:', error);
+    await incrementLocalBackgroundCount(userId, count);
   }
 };
 
