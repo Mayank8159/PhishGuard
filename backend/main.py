@@ -33,18 +33,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# PocketBase configuration
-POCKETBASE_URL = os.getenv("POCKETBASE_URL", "http://localhost:8090")
+# MongoDB configuration
+MONGODB_URL = os.getenv("MONGODB_URL", "mongodb+srv://mayankfhacker:Sharma2005@cluster0.wjr2epg.mongodb.net/phishguard?retryWrites=true&w=majority")
 
-if not POCKETBASE_URL:
-    logger.warning("PocketBase URL not configured. Set POCKETBASE_URL")
+if not MONGODB_URL:
+    logger.warning("MongoDB URL not configured. Set MONGODB_URL")
     db: Optional[Database] = None
 else:
-    db: Optional[Database] = Database(POCKETBASE_URL)
+    db: Optional[Database] = Database(MONGODB_URL)
     if db.is_connected():
-        logger.info(f"Connected to PocketBase at {POCKETBASE_URL}")
+        logger.info("Connected to MongoDB Atlas")
     else:
-        logger.warning(f"Cannot connect to PocketBase at {POCKETBASE_URL}")
+        logger.warning("Cannot connect to MongoDB Atlas")
 
 
 # ===========================

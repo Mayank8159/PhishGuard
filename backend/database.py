@@ -1,37 +1,44 @@
 """
-Database module for PocketBase operations
+Database module for MongoDB operations
 """
 from typing import Optional, List, Dict, Any
 import logging
-import requests
+from datetime import datetime
+from pymongo import MongoClient
+from bson import ObjectId
 
 logger = logging.getLogger(__name__)
 
 
 class Database:
-    """PocketBase database operations wrapper"""
+    """MongoDB database operations wrapper"""
     
-    def __init__(self, base_url: str):
-        """Initialize with PocketBase URL"""
-        self.base_url = base_url.rstrip("/")
-        self.session = requests.Session()
-        self.is_connected_flag = self._test_connection()
+    def __init__(self, connection_string: str):
+        """Initialize MongoDB connection"""
+        try:
+            self.client = MongoClient(connection_string, serverSelectionTimeoutMS=5000)
+            self.db = self.client.phishguard
+            self.users_collection = self.db.users
+            self.scans_collection = self.db.scans
+            self.is_connected_flag = self._test_connection()
+        except Exception as e:
+            logger.error(f"Failed to initialize MongoDB: {e}")
+            self.is_connected_flag = False
     
     def _test_connection(self) -> bool:
-        """Test if PocketBase is accessible"""
+        """Test if MongoDB is accessible"""
         try:
-            response = self.session.get(
-                f"{self.base_url}/api/health",
-                timeout=5
-            )
-            return response.status_code == 200
+            self.client.admin.command('ping')
+            logger.info("Connected to MongoDB Atlas")
+            return True
         except Exception as e:
-            logger.warning(f"Cannot connect to PocketBase: {e}")
+            logger.warning(f"Cannot connect to MongoDB: {e}")
             return False
     
     def is_connected(self) -> bool:
-        """Check if database is connected (re-test each time)"""
-        self.is_connected_flag = self._test_connection()
+        """Check if database is connected"""
+        if not self.is_connected_flag:
+            self.is_connected_flag = self._test_connection()
         return self.is_connected_flag
     
     def insert_scan(
@@ -44,23 +51,31 @@ class Database:
     ) -> Dict[str, Any]:
         """Insert a scan record"""
         try:
-            data = {
+            scan_doc = {
                 "user_id": user_id,
                 "url": url,
                 "status": status,
                 "risk_score": risk_score,
-                "threats": ",".join(threats)  # PocketBase stores as string
+                "threats": threats,
+                "created": datetime.utcnow(),
+                "timestamp": datetime.utcnow().isoformat()
             }
-            response = self.session.post(
-                f"{self.base_url}/api/collections/scans/records",
-                json=data,
-                timeout=10
+            result = self.scans_collection.insert_one(scan_doc)
+            
+            # Update user stats
+            self.users_collection.update_one(
+                {"_id": ObjectId(user_id)},
+                {
+                    "$inc": {"total_scans": 1},
+                    "$set": {"last_scan": datetime.utcnow()}
+                }
             )
-            if response.status_code in [200, 201]:
-                return response.json()
-            else:
-                logger.error(f"Error inserting scan: {response.text}")
-                return {}
+            
+            return {
+                "id": str(result.inserted_id),
+                **scan_doc,
+                "created": scan_doc["created"].isoformat()
+            }
         except Exception as e:
             logger.error(f"Error inserting scan: {e}")
             return {}
@@ -73,24 +88,21 @@ class Database:
     ) -> List[Dict[str, Any]]:
         """Get scan history for user"""
         try:
-            # PocketBase filter syntax
-            filter_query = f'user_id="{user_id}"'
-            response = self.session.get(
-                f"{self.base_url}/api/collections/scans/records",
-                params={
-                    "filter": filter_query,
-                    "sort": "-created",
-                    "limit": limit,
-                    "skip": offset
-                },
-                timeout=10
+            scans = list(
+                self.scans_collection.find(
+                    {"user_id": user_id}
+                )
+                .sort("created", -1)
+                .skip(offset)
+                .limit(limit)
             )
-            if response.status_code == 200:
-                data = response.json()
-                return data.get("items", [])
-            else:
-                logger.error(f"Error fetching scans: {response.text}")
-                return []
+            
+            # Convert ObjectId to string for API response
+            for scan in scans:
+                scan["id"] = str(scan.pop("_id"))
+                scan["timestamp"] = scan.get("created", datetime.utcnow()).isoformat()
+            
+            return scans
         except Exception as e:
             logger.error(f"Error fetching scans: {e}")
             return []
@@ -98,33 +110,21 @@ class Database:
     def get_user_stats(self, user_id: str) -> Dict[str, Any]:
         """Get user statistics"""
         try:
-            filter_query = f'user_id="{user_id}"'
-            response = self.session.get(
-                f"{self.base_url}/api/collections/scans/records",
-                params={"filter": filter_query},
-                timeout=10
-            )
+            scans = list(self.scans_collection.find({"user_id": user_id}))
             
-            if response.status_code == 200:
-                data = response.json()
-                scans = data.get("items", [])
-                
-                stats = {
-                    "safe": 0,
-                    "warning": 0,
-                    "dangerous": 0,
-                    "total": len(scans)
-                }
-                
-                for scan in scans:
-                    status = scan.get("status", "")
-                    if status in stats:
-                        stats[status] += 1
-                
-                return stats
-            else:
-                logger.error(f"Error fetching stats: {response.text}")
-                return {"safe": 0, "warning": 0, "dangerous": 0, "total": 0}
+            stats = {
+                "safe": 0,
+                "warning": 0,
+                "dangerous": 0,
+                "total": len(scans)
+            }
+            
+            for scan in scans:
+                status = scan.get("status", "")
+                if status in stats:
+                    stats[status] += 1
+            
+            return stats
         except Exception as e:
             logger.error(f"Error fetching stats: {e}")
             return {"safe": 0, "warning": 0, "dangerous": 0, "total": 0}
@@ -132,26 +132,20 @@ class Database:
     def delete_scan(self, scan_id: str, user_id: str) -> bool:
         """Delete a scan record"""
         try:
-            # First verify the scan belongs to the user
-            response = self.session.get(
-                f"{self.base_url}/api/collections/scans/records/{scan_id}",
-                timeout=10
+            # Verify the scan belongs to the user
+            scan = self.scans_collection.find_one(
+                {"_id": ObjectId(scan_id), "user_id": user_id}
             )
             
-            if response.status_code != 200:
-                return False
-            
-            scan = response.json()
-            if scan.get("user_id") != user_id:
+            if not scan:
                 logger.warning(f"Unauthorized delete attempt for scan {scan_id}")
                 return False
             
             # Delete the record
-            delete_response = self.session.delete(
-                f"{self.base_url}/api/collections/scans/records/{scan_id}",
-                timeout=10
+            result = self.scans_collection.delete_one(
+                {"_id": ObjectId(scan_id)}
             )
-            return delete_response.status_code in [200, 204]
+            return result.deleted_count > 0
         except Exception as e:
             logger.error(f"Error deleting scan: {e}")
             return False
@@ -159,15 +153,11 @@ class Database:
     def get_user_profile(self, user_id: str) -> Dict[str, Any]:
         """Get user profile"""
         try:
-            response = self.session.get(
-                f"{self.base_url}/api/collections/users/records/{user_id}",
-                timeout=10
-            )
-            if response.status_code == 200:
-                return response.json()
-            else:
-                logger.error(f"Error fetching profile: {response.text}")
-                return {}
+            user = self.users_collection.find_one({"_id": ObjectId(user_id)})
+            if user:
+                user["id"] = str(user.pop("_id"))
+                return user
+            return {}
         except Exception as e:
             logger.error(f"Error fetching profile: {e}")
             return {}
@@ -175,12 +165,49 @@ class Database:
     def update_user_profile(self, user_id: str, updates: Dict[str, Any]) -> bool:
         """Update user profile"""
         try:
-            response = self.session.patch(
-                f"{self.base_url}/api/collections/users/records/{user_id}",
-                json=updates,
-                timeout=10
+            result = self.users_collection.update_one(
+                {"_id": ObjectId(user_id)},
+                {"$set": updates}
             )
-            return response.status_code in [200, 204]
+            return result.modified_count > 0 or result.matched_count > 0
         except Exception as e:
             logger.error(f"Error updating profile: {e}")
             return False
+    
+    def create_user(
+        self,
+        email: str,
+        name: str,
+        password_hash: str
+    ) -> Dict[str, Any]:
+        """Create a new user"""
+        try:
+            user_doc = {
+                "email": email,
+                "name": name,
+                "password_hash": password_hash,
+                "total_scans": 0,
+                "threats_blocked": 0,
+                "created": datetime.utcnow()
+            }
+            result = self.users_collection.insert_one(user_doc)
+            return {
+                "id": str(result.inserted_id),
+                "email": email,
+                "name": name
+            }
+        except Exception as e:
+            logger.error(f"Error creating user: {e}")
+            return {}
+    
+    def get_user_by_email(self, email: str) -> Dict[str, Any]:
+        """Get user by email"""
+        try:
+            user = self.users_collection.find_one({"email": email})
+            if user:
+                user["id"] = str(user.pop("_id"))
+                return user
+            return {}
+        except Exception as e:
+            logger.error(f"Error fetching user by email: {e}")
+            return {}

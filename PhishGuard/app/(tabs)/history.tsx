@@ -49,12 +49,13 @@ export default function HistoryScreen() {
       setIsLoading(true);
       if (user) {
         const scans = await getRecentScans(user.id, 100);
+        console.log('Loaded scans:', scans);
         
         let formattedData = scans.map(item => ({
           id: item.id,
           url: item.url,
           status: item.status,
-          time: new Date(item.created_at || item.timestamp || new Date()).toLocaleString('en-US', {
+          time: item.timestamp || new Date().toLocaleString('en-US', {
             month: 'short',
             day: 'numeric',
             hour: '2-digit',

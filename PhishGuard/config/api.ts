@@ -21,6 +21,8 @@ export const api = {
         headers: {
           'Content-Type': 'application/json',
         },
+        mode: 'cors',
+        credentials: 'omit',
       });
 
       if (!response.ok) {
@@ -44,6 +46,8 @@ export const api = {
         headers: {
           'Content-Type': 'application/json',
         },
+        mode: 'cors',
+        credentials: 'omit',
         body: data ? JSON.stringify(data) : undefined,
       });
 
@@ -68,6 +72,8 @@ export const api = {
         headers: {
           'Content-Type': 'application/json',
         },
+        mode: 'cors',
+        credentials: 'omit',
       });
 
       if (!response.ok) {
