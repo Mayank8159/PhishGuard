@@ -222,7 +222,26 @@ const analyzeScrapedContent = (
       threats.push('Multiple password forms detected');
     } else if (scraped.forms === 1) {
       score += 8;
+      // Additional check: login form on suspicious domain
+      const suspiciousDomains = ['ngrok', 'loca.lt', 'serveo', 'localhost.run'];
+      if (suspiciousDomains.some((d) => url.toLowerCase().includes(d))) {
+        score += 25;
+        threats.push('Login form on tunneling service');
+      }
     }
+  }
+
+  // Check for email/username input fields (common in phishing)
+  const hasEmailInput =
+    html.includes('type="email"') ||
+    html.includes('name="email"') ||
+    html.includes('name="username"') ||
+    html.includes('id="email"') ||
+    html.includes('id="username"');
+
+  if (hasEmailInput && html.includes('type="password"')) {
+    score += 15;
+    threats.push('Credential harvesting form detected');
   }
 
   // Suspicious scripts
@@ -255,6 +274,10 @@ const analyzeScrapedContent = (
     'click here immediately',
     'limited time offer',
     'account will be closed',
+    'security alert',
+    'action required',
+    'review your account',
+    'unauthorized access',
   ];
 
   const foundPhrases = phishingPhrases.filter((phrase) => html.includes(phrase));
@@ -263,6 +286,34 @@ const analyzeScrapedContent = (
     threats.push('Phishing language detected');
   } else if (foundPhrases.length === 1) {
     score += 10;
+  }
+
+  // Check for brand cloning (zphisher specialty)
+  const brandIndicators = [
+    { name: 'facebook', patterns: ['facebook', 'fb', 'meta'] },
+    { name: 'instagram', patterns: ['instagram', 'insta'] },
+    { name: 'google', patterns: ['google', 'gmail'] },
+    { name: 'paypal', patterns: ['paypal'] },
+    { name: 'netflix', patterns: ['netflix'] },
+    { name: 'microsoft', patterns: ['microsoft', 'outlook', 'office'] },
+    { name: 'apple', patterns: ['apple', 'icloud'] },
+    { name: 'amazon', patterns: ['amazon'] },
+    { name: 'twitter', patterns: ['twitter', 'x.com'] },
+    { name: 'linkedin', patterns: ['linkedin'] },
+  ];
+
+  for (const brand of brandIndicators) {
+    const brandInContent = brand.patterns.some((pattern) => 
+      html.includes(pattern) || scraped.title.includes(pattern)
+    );
+    const brandInUrl = brand.patterns.some((pattern) => url.toLowerCase().includes(pattern));
+
+    // Brand mentioned in page but NOT in legitimate domain
+    if (brandInContent && !brandInUrl) {
+      score += 25;
+      threats.push(`Cloned ${brand.name} page detected`);
+      break;
+    }
   }
 
   // Check for misleading title
@@ -293,10 +344,44 @@ const analyzeScrapedContent = (
   }
 
   // Homograph/lookalike detection in title
-  const homographs = ['раypal', 'g00gle', 'αpple', 'micr0soft'];
+  const homographs = ['раypal', 'g00gle', 'αpple', 'micr0soft', 'facebοok', 'instαgram'];
   if (homographs.some((h) => titleLower.includes(h))) {
     score += 20;
     threats.push('Lookalike brand name');
+  }
+
+  // Check for cloned page indicators (CSS/images from real sites)
+  const externalResources = [
+    'facebook.com',
+    'instagram.com',
+    'google.com',
+    'paypal.com',
+    'netflix.com',
+    'microsoft.com',
+    'apple.com',
+  ];
+
+  const hasExternalBrandResources = externalResources.some((domain) => 
+    html.includes(`src="https://${domain}`) || 
+    html.includes(`href="https://${domain}`) ||
+    html.includes(`url(https://${domain}`)
+  );
+
+  if (hasExternalBrandResources && !externalResources.some((d) => url.includes(d))) {
+    score += 30;
+    threats.push('Stealing content from legitimate sites');
+  }
+
+  // Check for form action pointing to non-HTTPS or suspicious domains
+  if (html.includes('<form') && html.includes('action=')) {
+    const formActionMatch = html.match(/action\s*=\s*["']([^"']+)["']/i);
+    if (formActionMatch) {
+      const actionUrl = formActionMatch[1];
+      if (actionUrl.startsWith('http://') || actionUrl.includes('.php') || actionUrl === '#') {
+        score += 15;
+        threats.push('Suspicious form submission target');
+      }
+    }
   }
 
   return { score, threats };
@@ -357,7 +442,38 @@ const fallbackAnalysis = async (url: string): Promise<AnalysisResult> => {
     'account',
   ];
 
-  const suspiciousTlds = ['.tk', '.ml', '.ga', '.cf', '.xyz', '.top'];
+  const suspiciousTlds = ['.tk', '.ml', '.ga', '.cf', '.xyz', '.top', '.gq', '.pw'];
+
+  // Zphisher/tunneling service detection
+  const tunnelingServices = [
+    'ngrok.io',
+    'ngrok-free.app',
+    'ngrok.app',
+    'loca.lt',
+    'serveo.net',
+    'localhost.run',
+    'pagekite.me',
+    'tunnelto.dev',
+    'localtunnel.me',
+    'trycloudflare.com',
+    'cloudflare.com',
+    'tunnel.me',
+    'serveo.net',
+  ];
+
+  const isTunnelingService = tunnelingServices.some((service) => hostname.includes(service));
+  
+  if (isTunnelingService) {
+    riskScore += 40; // Increased from 35
+    threats.push('Tunneling service detected (high phishing risk)');
+    
+    // Extra penalty if it's a random subdomain (common zphisher pattern)
+    const subdomain = hostname.split('.')[0];
+    if (subdomain.includes('-') && subdomain.split('-').length >= 3) {
+      riskScore += 15;
+      threats.push('Random subdomain pattern');
+    }
+  }
 
   const isIpHost = /^\d+\.\d+\.\d+\.\d+$/.test(hostname);
   if (isIpHost) {
