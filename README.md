@@ -411,6 +411,9 @@ This project is licensed under the MIT License.
 ## 👨‍💻 Author
 
 **Mayank Kumar Sharma**
+**Shourjyo Chakraborty**
+**Ayushman Acharya**
+**Srija Kundu**
 
 ---
 
@@ -434,4 +437,5 @@ For issues, questions, or suggestions:
 **⚠️ Disclaimer**: PhishGuard is a security tool designed to assist in identifying potential phishing threats. While it uses advanced detection methods, no system is 100% accurate. Always exercise caution when visiting unfamiliar websites and never enter sensitive information on untrusted sites.
 
 **🛡️ Stay Safe Online!**
+
 
